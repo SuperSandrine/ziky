@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contactEmail } from "../data/site";
+import Icon from "../components/Icon.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+---
+
+<BaseLayout
+  title="Contact | Ziky Versari"
+  description="Contacter Ziky Versari pour un spectacle, un stage ou une collaboration."
+>
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <div class="mx-auto max-w-2xl text-center">
+      <SectionHeading
+        label="Contact"
+        title="Ecrire a Ziky"
+        description="Pour une programmation, un stage, une collaboration ou simplement echanger."
+        class="items-center"
+      />
+
+      <div class="mt-16 flex flex-col items-center gap-8">
+        <a href={`mailto:${contactEmail}`} class="group flex flex-col items-center gap-4">
+          <span class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-110">
+            <Icon name="mail" class="h-6 w-6" />
+          </span>
+          <span class="text-lg text-foreground underline underline-offset-4 transition-colors group-hover:text-accent">
+            {contactEmail}
+          </span>
+        </a>
+
+        <div class="flex items-center gap-3 text-muted-foreground">
+          <Icon name="map-pin" class="h-5 w-5" />
+          <span>Basee dans la Creuse, France</span>
+        </div>
+      </div>
+
+      <div class="mt-16 border-t border-border pt-12">
+        <h3 class="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          Je souhaite...
+        </h3>
+        <div class="mt-6 flex flex-col items-center gap-3">
+          <a
+            href={`mailto:${contactEmail}?subject=Programmation de spectacle`}
+            class="flex items-center gap-2 text-sm text-foreground transition-colors hover:text-accent"
+          >
+            Programmer un spectacle <Icon name="arrow-right" class="h-3.5 w-3.5" />
+          </a>
+          <a
+            href={`mailto:${contactEmail}?subject=Organisation d'un stage ou atelier`}
+            class="flex items-center gap-2 text-sm text-foreground transition-colors hover:text-accent"
+          >
+            Organiser un stage ou atelier <Icon name="arrow-right" class="h-3.5 w-3.5" />
+          </a>
+          <a
+            href={`mailto:${contactEmail}?subject=Collaboration artistique`}
+            class="flex items-center gap-2 text-sm text-foreground transition-colors hover:text-accent"
+          >
+            Proposer une collaboration <Icon name="arrow-right" class="h-3.5 w-3.5" />
+          </a>
+        </div>
+      </div>
+
+      <hr class="mx-auto mt-16 w-16 border-accent" />
+
+      <p class="mt-8 text-sm leading-relaxed text-muted-foreground">
+        Artiste independante, Ziky Versari se deplace pour des spectacles et des stages partout en France et au-dela.
+      </p>
+
+      <div class="mt-12 flex flex-wrap justify-center gap-4">
+        <a
+          href="/spectacles"
+          class="border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+        >
+          Voir les spectacles
+        </a>
+        <a
+          href="/stages"
+          class="border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+        >
+          Voir les stages
+        </a>
+        <a
+          href="/calendrier"
+          class="border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+        >
+          Voir l'agenda
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,61 @@
+---
+import { biography } from "../data/site";
+import Icon from "./Icon.astro";
+---
+
+<section class="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center">
+  <div class="absolute inset-0 bg-muted" aria-hidden="true">
+    <div class="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background"></div>
+  </div>
+
+  <div class="relative z-10 flex flex-col items-center">
+    <span
+      class="animate-fade-in-up mb-6 text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground"
+      style="animation-delay: 200ms;"
+    >
+      Clown - Cirque - Pédagogie
+    </span>
+
+    <h1
+      class="animate-fade-in-up max-w-4xl font-serif text-5xl leading-tight text-foreground md:text-7xl lg:text-8xl text-balance"
+      style="animation-delay: 400ms;"
+    >
+      Ziky Versari
+    </h1>
+
+    <p
+      class="animate-fade-in-up mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground"
+      style="animation-delay: 600ms;"
+    >
+      {biography.intro}
+    </p>
+
+    <div
+      class="animate-fade-in-up mt-10 flex flex-col items-center gap-4 sm:flex-row"
+      style="animation-delay: 800ms;"
+    >
+      <a
+        href="/spectacles"
+        class="inline-flex items-center gap-2 bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:scale-[1.02] hover:shadow-lg"
+      >
+        Découvrir mes spectacles
+        <Icon name="arrow-right" class="h-4 w-4" />
+      </a>
+      <a
+        href="/calendrier"
+        class="inline-flex items-center gap-2 border border-foreground px-7 py-3.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground hover:text-background"
+      >
+        Voir l'agenda
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="animate-fade-in-up absolute bottom-8 flex flex-col items-center gap-2 text-muted-foreground/50"
+    style="animation-delay: 1200ms;"
+    aria-hidden="true"
+  >
+    <span class="text-[10px] uppercase tracking-[0.2em]">Défiler</span>
+    <Icon name="chevron-down" class="h-4 w-4 animate-bounce" />
+  </div>
+</section>

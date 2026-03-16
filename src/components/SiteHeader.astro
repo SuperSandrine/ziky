@@ -1,0 +1,122 @@
+---
+import { navigation } from "../data/site";
+import Icon from "./Icon.astro";
+
+interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+
+const isActive = (href: string) =>
+  pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
+---
+
+<header
+  class="site-header sticky top-0 z-50 transition-all duration-300"
+  data-site-header
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a href="/" class="font-serif text-xl tracking-tight text-foreground transition-colors hover:text-accent">
+      Ziky Versari
+    </a>
+
+    <nav class="hidden items-center gap-8 md:flex" aria-label="Navigation principale">
+      {navigation.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            "relative text-sm tracking-wide transition-colors",
+            isActive(item.href)
+              ? "text-foreground"
+              : "text-muted-foreground hover:text-foreground",
+          ]}
+          aria-current={isActive(item.href) ? "page" : undefined}
+        >
+          {item.label}
+          <span
+            class:list={[
+              "absolute -bottom-1 left-0 h-px bg-accent transition-all duration-300",
+              isActive(item.href) ? "w-full" : "w-0",
+            ]}
+          ></span>
+        </a>
+      ))}
+    </nav>
+
+    <button
+      type="button"
+      class="relative z-50 text-foreground md:hidden"
+      data-menu-toggle
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+    >
+      <span data-menu-open-icon><Icon name="menu" class="h-5 w-5" /></span>
+      <span class="hidden" data-menu-close-icon><Icon name="x" class="h-5 w-5" /></span>
+    </button>
+  </div>
+
+  <div
+    class="pointer-events-none fixed inset-0 z-40 flex flex-col items-center justify-center bg-background opacity-0 transition-all duration-500 md:hidden"
+    data-mobile-nav
+    aria-hidden="true"
+  >
+    <nav aria-label="Navigation mobile" class="flex flex-col items-center gap-8">
+      {navigation.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            "font-serif text-3xl transition-colors",
+            isActive(item.href) ? "text-foreground" : "text-muted-foreground",
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <p class="absolute bottom-12 text-xs uppercase tracking-widest text-muted-foreground">
+      Clown - Cirque - Pédagogie
+    </p>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector("[data-site-header]");
+  const toggle = document.querySelector("[data-menu-toggle]");
+  const mobileNav = document.querySelector("[data-mobile-nav]");
+  const openIcon = document.querySelector("[data-menu-open-icon]");
+  const closeIcon = document.querySelector("[data-menu-close-icon]");
+
+  const syncScroll = () => {
+    if (!header) return;
+    const scrolled = window.scrollY > 40;
+    header.classList.toggle("bg-background/95", scrolled);
+    header.classList.toggle("backdrop-blur-md", scrolled);
+    header.classList.toggle("shadow-sm", scrolled);
+    header.classList.toggle("border-b", scrolled);
+    header.classList.toggle("border-border", scrolled);
+  };
+
+  const setMenuOpen = (open) => {
+    if (!toggle || !mobileNav || !openIcon || !closeIcon) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+    mobileNav.classList.toggle("opacity-100", open);
+    mobileNav.classList.toggle("pointer-events-auto", open);
+    mobileNav.classList.toggle("opacity-0", !open);
+    mobileNav.classList.toggle("pointer-events-none", !open);
+    openIcon.classList.toggle("hidden", open);
+    closeIcon.classList.toggle("hidden", !open);
+    document.body.style.overflow = open ? "hidden" : "";
+  };
+
+  syncScroll();
+  window.addEventListener("scroll", syncScroll, { passive: true });
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    setMenuOpen(open);
+  });
+  mobileNav?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setMenuOpen(false));
+  });
+</script>

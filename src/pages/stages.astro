@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contactEmail, pedagogyIntro, workshops } from "../data/site";
+import Icon from "../components/Icon.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import StagesFaq from "../components/StagesFaq.astro";
+import WorkshopCard from "../components/WorkshopCard.astro";
+---
+
+<BaseLayout
+  title="Stages et Ateliers | Ziky Versari"
+  description="Stages de clown et ateliers pédagogiques proposés par Ziky Versari."
+>
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <SectionHeading label="Pédagogie" title="Stages et Ateliers" />
+
+    <div class="mx-auto mt-12 max-w-3xl">
+      <blockquote class="border-l-2 border-accent pl-6 font-serif text-xl italic leading-relaxed text-foreground">
+        {pedagogyIntro.quote}
+      </blockquote>
+
+      <div class="mt-8 flex flex-col gap-5">
+        {pedagogyIntro.text.split("\n\n").map((paragraph) => (
+          <p class="leading-relaxed text-muted-foreground">{paragraph}</p>
+        ))}
+      </div>
+    </div>
+
+    <hr class="mx-auto my-16 max-w-3xl border-border" />
+
+    <div class="flex flex-col gap-24">
+      {workshops.map((workshop) => (
+        <div id={workshop.slug} class="scroll-mt-24">
+          <WorkshopCard workshop={workshop} />
+        </div>
+      ))}
+    </div>
+
+    <section class="mt-24 border-t border-border pt-16">
+      <SectionHeading label="Informations pratiques" title="Questions fréquentes" />
+      <div class="mx-auto mt-8 max-w-3xl">
+        <StagesFaq />
+      </div>
+    </section>
+
+    <section class="mt-24 border-t border-border pt-16 text-center">
+      <h2 class="font-serif text-3xl text-foreground">Intéressé-e ?</h2>
+      <p class="mx-auto mt-4 max-w-xl text-muted-foreground">
+        Pour organiser un stage, un atelier ou pour toute question, n'hésitez pas à me contacter.
+      </p>
+      <a
+        href={`mailto:${contactEmail}?subject=Stages et ateliers`}
+        class="mt-8 inline-flex items-center gap-2 bg-primary px-7 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:scale-[1.02]"
+      >
+        <Icon name="mail" class="h-4 w-4" />
+        Me contacter
+      </a>
+    </section>
+  </div>
+</BaseLayout>

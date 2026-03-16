@@ -1,0 +1,21 @@
+---
+import CalendarFilter from "../components/CalendarFilter.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import { calendarEvents } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Calendrier | Ziky Versari"
+  description="Prochaines dates de spectacles, stages et ateliers de Ziky Versari."
+>
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <SectionHeading
+      label="Agenda"
+      title="Calendrier"
+      description="Prochaines dates de spectacles, stages et ateliers."
+    />
+
+    <CalendarFilter events={calendarEvents} />
+  </div>
+</BaseLayout>

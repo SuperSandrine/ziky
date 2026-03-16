@@ -1,0 +1,168 @@
+---
+import type { GalleryImage } from "../data/site";
+import ImagePlaceholder from "./ImagePlaceholder.astro";
+
+interface Category {
+  key: string;
+  label: string;
+}
+
+interface Props {
+  images: GalleryImage[];
+  categories: readonly Category[];
+}
+
+const { images, categories } = Astro.props;
+
+const aspectFor = (category: GalleryImage["category"]) => {
+  if (category === "portrait") return "portrait";
+  if (category === "coulisses") return "square";
+  return "video";
+};
+---
+
+<div data-gallery-grid>
+  <div class="mt-8 flex flex-wrap gap-2">
+    {categories.map((category, index) => (
+      <button
+        type="button"
+        class:list={[
+          "px-4 py-2 text-sm transition-colors",
+          index === 0
+            ? "bg-foreground text-background"
+            : "border border-border text-muted-foreground hover:text-foreground",
+        ]}
+        data-gallery-filter={category.key}
+      >
+        {category.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3" data-gallery-list>
+    {images.map((image) => (
+      <button
+        type="button"
+        class="mb-4 block w-full overflow-hidden rounded-sm transition-transform hover:scale-[1.01]"
+        data-gallery-item
+        data-category={image.category}
+        data-alt={image.alt}
+        data-src={image.src}
+        data-aspect={aspectFor(image.category)}
+        aria-label={`Voir ${image.alt} en grand`}
+      >
+        {image.src ? (
+          <img src={image.src} alt={image.alt} class="h-auto w-full" loading="lazy" />
+        ) : (
+          <ImagePlaceholder alt={image.alt} aspect={aspectFor(image.category)} />
+        )}
+      </button>
+    ))}
+  </div>
+
+  <p class="hidden py-16 text-center text-muted-foreground" data-gallery-empty>
+    Aucune photo dans cette categorie pour le moment.
+  </p>
+
+  <div
+    class="pointer-events-none fixed inset-0 z-50 hidden items-center justify-center bg-foreground/90 p-6 opacity-0"
+    data-gallery-lightbox
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+  >
+    <button
+      type="button"
+      class="absolute right-6 top-6 text-background transition-opacity hover:opacity-70"
+      data-gallery-close
+      aria-label="Fermer"
+    >
+      ×
+    </button>
+    <div class="max-h-[85vh] max-w-4xl">
+      <img class="hidden max-h-[85vh] w-auto rounded-sm" data-gallery-lightbox-image alt="" />
+      <div class="hidden text-background" data-gallery-lightbox-placeholder>
+        <ImagePlaceholder alt="Image de la galerie" aspect="video" class="w-[600px] max-w-full" />
+      </div>
+      <p class="mt-4 text-center text-sm text-background/70" data-gallery-caption></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector("[data-gallery-grid]");
+  if (root) {
+    const buttons = Array.from(root.querySelectorAll("[data-gallery-filter]"));
+    const items = Array.from(root.querySelectorAll("[data-gallery-item]"));
+    const empty = root.querySelector("[data-gallery-empty]");
+    const lightbox = root.querySelector("[data-gallery-lightbox]");
+    const lightboxImage = root.querySelector("[data-gallery-lightbox-image]");
+    const lightboxPlaceholder = root.querySelector("[data-gallery-lightbox-placeholder]");
+    const caption = root.querySelector("[data-gallery-caption]");
+    const close = root.querySelector("[data-gallery-close]");
+
+    const setFilter = (value) => {
+      let visible = 0;
+      buttons.forEach((button) => {
+        const active = button.dataset.galleryFilter === value;
+        button.classList.toggle("bg-foreground", active);
+        button.classList.toggle("text-background", active);
+        button.classList.toggle("border", !active);
+        button.classList.toggle("border-border", !active);
+        button.classList.toggle("text-muted-foreground", !active);
+      });
+
+      items.forEach((item) => {
+        const show = value === "all" || item.dataset.category === value;
+        item.classList.toggle("hidden", !show);
+        if (show) visible += 1;
+      });
+
+      empty?.classList.toggle("hidden", visible !== 0);
+    };
+
+    const closeLightbox = () => {
+      if (!lightbox) return;
+      lightbox.classList.add("hidden");
+      lightbox.classList.remove("flex", "opacity-100", "pointer-events-auto");
+      lightbox.classList.add("opacity-0", "pointer-events-none");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    };
+
+    items.forEach((item) => {
+      item.addEventListener("click", () => {
+        const src = item.dataset.src || "";
+        const alt = item.dataset.alt || "";
+        if (!lightbox || !caption || !(lightboxImage instanceof HTMLImageElement)) return;
+
+        caption.textContent = alt;
+        if (src) {
+          lightboxImage.src = src;
+          lightboxImage.alt = alt;
+          lightboxImage.classList.remove("hidden");
+          lightboxPlaceholder?.classList.add("hidden");
+        } else {
+          lightboxImage.classList.add("hidden");
+          lightboxPlaceholder?.classList.remove("hidden");
+        }
+
+        lightbox.classList.remove("hidden", "opacity-0", "pointer-events-none");
+        lightbox.classList.add("flex", "opacity-100", "pointer-events-auto");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => setFilter(button.dataset.galleryFilter || "all"));
+    });
+    close?.addEventListener("click", closeLightbox);
+    lightbox?.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeLightbox();
+    });
+  }
+</script>

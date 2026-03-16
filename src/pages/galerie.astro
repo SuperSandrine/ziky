@@ -1,0 +1,29 @@
+---
+import GalleryGrid from "../components/GalleryGrid.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import { galleryImages } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const categories = [
+  { key: "all", label: "Tout" },
+  { key: "spectacle", label: "Spectacles" },
+  { key: "atelier", label: "Ateliers" },
+  { key: "portrait", label: "Portraits" },
+  { key: "coulisses", label: "Coulisses" },
+] as const;
+---
+
+<BaseLayout
+  title="Galerie | Ziky Versari"
+  description="Photographies de spectacles, ateliers et coulisses de Ziky Versari."
+>
+  <div class="mx-auto max-w-6xl px-6 py-16">
+    <SectionHeading
+      label="Photographies"
+      title="Galerie"
+      description="Images de spectacles, ateliers, portraits et coulisses."
+    />
+
+    <GalleryGrid images={galleryImages} categories={categories} />
+  </div>
+</BaseLayout>

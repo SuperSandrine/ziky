@@ -1,0 +1,51 @@
+---
+import { contactEmail, navigation } from "../data/site";
+import Icon from "./Icon.astro";
+---
+
+<footer class="border-t border-border bg-primary text-primary-foreground">
+  <div class="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-3">
+    <div class="flex flex-col gap-4">
+      <a href="/" class="font-serif text-2xl tracking-tight">Ziky Versari</a>
+      <p class="text-sm leading-relaxed opacity-70">
+        Clown-e et jongleureuse antipodiste. Spectacles, ateliers et stages de clown inscrits dans le mouvement de l'éducation populaire.
+      </p>
+      <a href="/a-propos" class="mt-1 text-sm underline underline-offset-4 opacity-70 transition-opacity hover:opacity-100">
+        En savoir plus
+      </a>
+    </div>
+
+    <nav class="flex flex-col gap-3" aria-label="Liens du pied de page">
+      <span class="text-xs font-medium uppercase tracking-[0.2em] opacity-50">Navigation</span>
+      {navigation.map((item) => (
+        <a href={item.href} class="text-sm opacity-70 transition-opacity hover:opacity-100">
+          {item.label}
+        </a>
+      ))}
+      <a href="/mentions-legales" class="mt-2 text-sm opacity-50 transition-opacity hover:opacity-70">
+        Mentions légales
+      </a>
+    </nav>
+
+    <div class="flex flex-col gap-4">
+      <span class="text-xs font-medium uppercase tracking-[0.2em] opacity-50">Contact</span>
+      <a
+        href={`mailto:${contactEmail}`}
+        class="flex items-center gap-2 text-sm opacity-70 transition-opacity hover:opacity-100"
+      >
+        <Icon name="mail" class="h-4 w-4 shrink-0" />
+        {contactEmail}
+      </a>
+      <div class="flex items-center gap-2 text-sm opacity-70">
+        <Icon name="map-pin" class="h-4 w-4 shrink-0" />
+        La Creuse, France
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-primary-foreground/10 px-6 py-4">
+    <p class="mx-auto max-w-6xl text-center text-xs opacity-40">
+      {new Date().getFullYear()} Ziky Versari - Site conçu avec soin
+    </p>
+  </div>
+</footer>

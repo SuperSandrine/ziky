@@ -1,0 +1,76 @@
+---
+import type { Workshop } from "../data/site";
+import Icon from "./Icon.astro";
+import ImagePlaceholder from "./ImagePlaceholder.astro";
+
+interface Props {
+  workshop: Workshop;
+  compact?: boolean;
+}
+
+const { workshop, compact = false } = Astro.props;
+---
+
+{
+  compact ? (
+    <a
+      href={`/stages#${workshop.slug}`}
+      class="group flex gap-4 border-b border-border pb-4 transition-colors last:border-0"
+    >
+      <div class="flex flex-1 flex-col gap-1">
+        <h3 class="font-serif text-lg text-foreground transition-colors group-hover:text-accent">
+          {workshop.title}
+        </h3>
+        <div class="flex items-center gap-4 text-xs text-muted-foreground">
+          <span class="flex items-center gap-1">
+            <Icon name="clock" class="h-3 w-3" />
+            {workshop.duration}
+          </span>
+          <span class="flex items-center gap-1">
+            <Icon name="users" class="h-3 w-3" />
+            {workshop.maxParticipants} max
+          </span>
+        </div>
+      </div>
+    </a>
+  ) : (
+    <article class="group flex flex-col gap-4">
+      <div class="overflow-hidden rounded-sm">
+        <ImagePlaceholder
+          alt={workshop.imagePlaceholder}
+          aspect="video"
+          class="transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+      </div>
+      <div class="flex flex-col gap-2">
+        <h3 class="font-serif text-xl text-foreground">{workshop.title}</h3>
+        <div class="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+          <span class="flex items-center gap-1">
+            <Icon name="clock" class="h-3.5 w-3.5" />
+            {workshop.duration}
+          </span>
+          <span class="flex items-center gap-1">
+            <Icon name="users" class="h-3.5 w-3.5" />
+            {workshop.maxParticipants} participant·es max
+          </span>
+          <span class="border border-border px-2 py-0.5 text-[11px]">
+            {workshop.audience}
+          </span>
+        </div>
+        <p class="text-sm leading-relaxed text-muted-foreground">
+          {workshop.description}
+        </p>
+        {workshop.program && (
+          <ul class="mt-2 flex flex-col gap-1.5">
+            {workshop.program.map((item) => (
+              <li class="flex gap-2 text-sm text-muted-foreground">
+                <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </article>
+  )
+}

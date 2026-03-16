@@ -1,0 +1,29 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  alt: string;
+  aspect?: "square" | "video" | "portrait" | "wide";
+  class?: string;
+}
+
+const { alt, aspect = "video", class: className = "" } = Astro.props;
+
+const aspectMap = {
+  square: "aspect-square",
+  video: "aspect-video",
+  portrait: "aspect-[3/4]",
+  wide: "aspect-[2/1]",
+};
+---
+
+<div
+  class:list={["flex items-center justify-center rounded-sm bg-muted", aspectMap[aspect], className]}
+  role="img"
+  aria-label={alt}
+>
+  <div class="flex flex-col items-center gap-2 text-center text-muted-foreground/50">
+    <Icon name="image" class="h-8 w-8" />
+    <span class="max-w-[200px] text-xs">{alt}</span>
+  </div>
+</div>
