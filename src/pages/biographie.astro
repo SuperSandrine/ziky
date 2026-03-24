@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { biography, companies, formations } from "../data/site";
+import { biography, biographyTimeline, companies, formations } from "../data/site";
 import Icon from "../components/Icon.astro";
 import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import SectionHeading from "../components/SectionHeading.astro";
@@ -17,11 +17,11 @@ const disciplineIcons: Record<string, string> = {
 ---
 
 <BaseLayout
-  title="À propos | Ziky Versari"
+  title="Biographie | Ziky Versari"
   description="Biographie de Ziky Versari, clown, jongleureuse antipodiste et pédagogue."
 >
   <div class="mx-auto max-w-6xl px-6 py-16">
-    <SectionHeading label="À propos" title="Biographie" />
+    <SectionHeading label="Biographie" title="Biographie" />
     <div class="mt-1 h-px w-16 bg-accent" aria-hidden="true"></div>
 
     <div class="mt-16 grid gap-12 md:grid-cols-[2fr_3fr]">
@@ -49,6 +49,25 @@ const disciplineIcons: Record<string, string> = {
       {paragraphs.slice(3).map((paragraph) => (
         <p class="leading-relaxed text-muted-foreground">{paragraph}</p>
       ))}
+    </div>
+
+    <div class="mx-auto mt-16 max-w-3xl border-t border-border pt-12">
+      <h3 class="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+        Historique
+      </h3>
+      <div class="mt-8 flex flex-col gap-6">
+        {biographyTimeline.map((item) => (
+          <div class="grid gap-3 border-l border-border pl-5 md:grid-cols-[140px_1fr] md:gap-6">
+            <span class="text-xs font-medium uppercase tracking-[0.2em] text-accent">
+              {item.date}
+            </span>
+            <div class="pb-6">
+              <h4 class="font-serif text-xl text-foreground">{item.title}</h4>
+              <p class="mt-2 leading-relaxed text-muted-foreground">{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
 
     <div class="mx-auto mt-16 max-w-3xl border-t border-border pt-12">

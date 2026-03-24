@@ -8,27 +8,43 @@ import Icon from "./Icon.astro";
     <div class="flex flex-col gap-4">
       <a href="/" class="font-serif text-2xl tracking-tight">Ziky Versari</a>
       <p class="text-sm leading-relaxed opacity-70">
-        Clown-e et jongleureuse antipodiste. Spectacles, ateliers et stages de clown inscrits dans le mouvement de l'éducation populaire.
+        Clown-e et jongleureuse antipodiste. Spectacles, ateliers et stages de
+        clown inscrits dans le mouvement de l'éducation populaire.
       </p>
-      <a href="/a-propos" class="mt-1 text-sm underline underline-offset-4 opacity-70 transition-opacity hover:opacity-100">
+      <a
+        href="/biographie"
+        class="mt-1 text-sm underline underline-offset-4 opacity-70 transition-opacity hover:opacity-100"
+      >
         En savoir plus
       </a>
     </div>
 
     <nav class="flex flex-col gap-3" aria-label="Liens du pied de page">
-      <span class="text-xs font-medium uppercase tracking-[0.2em] opacity-50">Navigation</span>
-      {navigation.map((item) => (
-        <a href={item.href} class="text-sm opacity-70 transition-opacity hover:opacity-100">
-          {item.label}
-        </a>
-      ))}
-      <a href="/mentions-legales" class="mt-2 text-sm opacity-50 transition-opacity hover:opacity-70">
+      <span class="text-xs font-medium uppercase tracking-[0.2em] opacity-50"
+        >Navigation</span
+      >
+      {
+        navigation.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm opacity-70 transition-opacity hover:opacity-100"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href="/mentions-legales"
+        class="mt-2 text-sm opacity-50 transition-opacity hover:opacity-70"
+      >
         Mentions légales
       </a>
     </nav>
 
     <div class="flex flex-col gap-4">
-      <span class="text-xs font-medium uppercase tracking-[0.2em] opacity-50">Contact</span>
+      <span class="text-xs font-medium uppercase tracking-[0.2em] opacity-50"
+        >Contact</span
+      >
       <a
         href={`mailto:${contactEmail}`}
         class="flex items-center gap-2 text-sm opacity-70 transition-opacity hover:opacity-100"

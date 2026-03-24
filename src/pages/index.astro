@@ -25,7 +25,9 @@ import Icon from "../components/Icon.astro";
           title="Stages et Ateliers"
           description="Ateliers de clown inscrits dans le mouvement de l'éducation populaire, dans un cadre ludique et participatif."
         />
-        <blockquote class="mt-8 border-l-2 border-accent pl-6 font-serif text-lg italic leading-relaxed text-muted-foreground">
+        <blockquote
+          class="mt-8 border-l-2 border-accent pl-6 font-serif text-lg italic leading-relaxed text-muted-foreground"
+        >
           {pedagogyIntro.quote}
         </blockquote>
         <a
@@ -36,7 +38,11 @@ import Icon from "../components/Icon.astro";
         </a>
       </div>
       <div class="flex flex-col gap-4">
-        {workshops.slice(0, 3).map((workshop) => <WorkshopCard workshop={workshop} compact />)}
+        {
+          workshops
+            .slice(0, 3)
+            .map((workshop) => <WorkshopCard workshop={workshop} compact />)
+        }
         <a
           href="/stages"
           class="mt-2 flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -53,7 +59,7 @@ import Icon from "../components/Icon.astro";
     <div class="grid gap-12 md:grid-cols-[1fr_2fr]">
       <ImagePlaceholder alt="Portrait de Ziky Versari" aspect="portrait" />
       <div class="flex flex-col justify-center">
-        <SectionHeading label="À propos" title="Parcours" />
+        <SectionHeading label="Biographie" title="Parcours" />
         <p class="mt-6 leading-relaxed text-muted-foreground">
           {biography.full.split("\n\n")[0]}
         </p>
@@ -61,17 +67,22 @@ import Icon from "../components/Icon.astro";
           {biography.full.split("\n\n")[1]}
         </p>
         <div class="mt-8 flex flex-wrap gap-2">
-          {biography.disciplines.map((discipline) => (
-            <span class="border border-border px-3 py-1 text-xs tracking-wide text-muted-foreground">
-              {discipline}
-            </span>
-          ))}
+          {
+            biography.disciplines.map((discipline) => (
+              <span class="border border-border px-3 py-1 text-xs tracking-wide text-muted-foreground">
+                {discipline}
+              </span>
+            ))
+          }
         </div>
         <a
-          href="/a-propos"
+          href="/biographie"
           class="mt-8 inline-flex items-center gap-2 text-sm font-medium text-foreground underline underline-offset-4 transition-colors hover:text-accent"
         >
-          Lire la biographie complète <Icon name="arrow-right" class="h-3.5 w-3.5" />
+          Lire la biographie complète <Icon
+            name="arrow-right"
+            class="h-3.5 w-3.5"
+          />
         </a>
       </div>
     </div>

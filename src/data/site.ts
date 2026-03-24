@@ -53,14 +53,20 @@ export interface GalleryImage {
   showSlug?: string;
 }
 
+export interface BiographyMilestone {
+  date: string;
+  title: string;
+  description: string;
+}
+
 export const contactEmail = "bonjour@ziky-versari.fr";
 
 export const navigation = [
   { label: "Spectacles", href: "/spectacles" },
   { label: "Stages & Ateliers", href: "/stages" },
-  { label: "Calendrier", href: "/calendrier" },
+  { label: "Biographie", href: "/biographie" },
   { label: "Galerie", href: "/galerie" },
-  { label: "A propos", href: "/a-propos" },
+  { label: "Calendrier", href: "/calendrier" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -98,49 +104,49 @@ export const shows: Show[] = [
     shortDescription: "Projet collectif en cours de creation.",
     imagePlaceholder: "Photo de La Lutte Finale",
   },
-  {
-    slug: "peau-d-orange",
-    title: "Peau d'orange",
-    year: "2018",
-    status: "archive",
-    type: "solo",
-    roles: ["Clown", "Ecriture", "Interpretation"],
-    shortDescription:
-      "Un solo explorant les deformations et prolongements crees par la rencontre entre le corps et des objets du quotidien.",
-    imagePlaceholder: "Photo de Peau d'orange",
-  },
-  {
-    slug: "mise-en-bouche",
-    title: "Mise en bouche",
-    year: "2014",
-    status: "archive",
-    type: "solo",
-    roles: ["Clown", "Ecriture", "Interpretation"],
-    shortDescription:
-      "Solo clownesque autour de la relation entre le corps et la nourriture.",
-    imagePlaceholder: "Photo de Mise en bouche",
-  },
-  {
-    slug: "ballade-de-rossure",
-    title: "Ballade de Rossure",
-    year: "2008",
-    status: "archive",
-    type: "solo",
-    roles: ["Clown", "Ecriture", "Interpretation"],
-    shortDescription: "Premier solo, premiere rencontre avec le public.",
-    imagePlaceholder: "Photo de Ballade de Rossure",
-  },
-  {
-    slug: "les-poneys-rouges",
-    title: "Les Poneys Rouges",
-    year: "2012 - 2020",
-    status: "archive",
-    type: "collectif",
-    roles: ["Clown", "Cofondatrice", "Mise en scene"],
-    shortDescription:
-      "Collectif de quatre clowns. Spectacles, stages et laboratoires clownesques.",
-    imagePlaceholder: "Photo des Poneys Rouges",
-  },
+  // {
+  //   slug: "peau-d-orange",
+  //   title: "Peau d'orange",
+  //   year: "2018",
+  //   status: "archive",
+  //   type: "solo",
+  //   roles: ["Clown", "Ecriture", "Interpretation"],
+  //   shortDescription:
+  //     "Un solo explorant les deformations et prolongements crees par la rencontre entre le corps et des objets du quotidien.",
+  //   imagePlaceholder: "Photo de Peau d'orange",
+  // },
+  // {
+  //   slug: "mise-en-bouche",
+  //   title: "Mise en bouche",
+  //   year: "2014",
+  //   status: "archive",
+  //   type: "solo",
+  //   roles: ["Clown", "Ecriture", "Interpretation"],
+  //   shortDescription:
+  //     "Solo clownesque autour de la relation entre le corps et la nourriture.",
+  //   imagePlaceholder: "Photo de Mise en bouche",
+  // },
+  // {
+  //   slug: "ballade-de-rossure",
+  //   title: "Ballade de Rossure",
+  //   year: "2008",
+  //   status: "archive",
+  //   type: "solo",
+  //   roles: ["Clown", "Ecriture", "Interpretation"],
+  //   shortDescription: "Premier solo, premiere rencontre avec le public.",
+  //   imagePlaceholder: "Photo de Ballade de Rossure",
+  // },
+  // {
+  //   slug: "les-poneys-rouges",
+  //   title: "Les Poneys Rouges",
+  //   year: "2012 - 2020",
+  //   status: "archive",
+  //   type: "collectif",
+  //   roles: ["Clown", "Cofondatrice", "Mise en scene"],
+  //   shortDescription:
+  //     "Collectif de quatre clowns. Spectacles, stages et laboratoires clownesques.",
+  //   imagePlaceholder: "Photo des Poneys Rouges",
+  // },
 ];
 
 export const workshops: Workshop[] = [
@@ -289,7 +295,7 @@ export const companies: Company[] = [
 
 export const biography = {
   intro:
-    "Ziky Versari est clown-e et jongleureuse antipodiste. Son travail elabore des univers placant le corps au centre de l'action, debordant, matiere de contact et de relation au monde.",
+    "Ziky Versari est clown-e et jongleureuse antipodiste. Son travail élabore des univers plaçant le corps au centre de l'action, débordant, matière de contact et de relation au monde.",
   full: `Artiste et pedagogue dans les domaines du clown, du cirque, j'accorde beaucoup d'importance au processus de creation et au fait de reflechir a nos manieres de cooperer et de produire un spectacle a plusieurs.
 
 Ma recherche en tant que clown me permet d'experimenter des comportements hors-normes et de tenter de les rendre acceptables. Je peux ainsi amener le public, le temps d'une representation a depasser des croyances limitantes au sujet de certains tabous ce qui est pour moi une maniere de rendre legitimes des existences marginales.
@@ -311,6 +317,38 @@ Basee depuis peu dans la Creuse, je propose aujourd'hui des spectacles, des atel
     "Pedagogie",
   ],
 };
+
+export const biographyTimeline: BiographyMilestone[] = [
+  {
+    date: "2008",
+    title: "Ballade de Rossure",
+    description: "Premier solo et premiere rencontre avec le public.",
+  },
+  {
+    date: "2012 - 2020",
+    title: "Les Poneys Rouges",
+    description:
+      "Cofondation du collectif, creation de spectacles, stages et laboratoires clownesques.",
+  },
+  {
+    date: "2014",
+    title: "Mise en bouche",
+    description:
+      "Creation d'un solo clownesque autour de la relation entre le corps et la nourriture.",
+  },
+  {
+    date: "2018",
+    title: "Peau d'orange",
+    description:
+      "Creation d'un solo explorant les deformations et prolongements nes de la rencontre entre le corps et des objets du quotidien.",
+  },
+  {
+    date: "Aujourd'hui",
+    title: "Spectacles, ateliers et stages",
+    description:
+      "Installation en Creuse et poursuite d'un travail entre clown, cirque, transmission et intelligence collective.",
+  },
+];
 
 export const pedagogyIntro = {
   quote:

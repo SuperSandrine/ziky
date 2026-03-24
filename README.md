@@ -1,14 +1,15 @@
 <!-- TODO: control 
-1 - faire un index
+ok 1 - faire un index
 2 - ajouter un apperçu
-2 - ajouter pré-requi
-3 - ajouter guide d'installation
-4 - ajouter guide d'utilisation
-5 - ajouter une roadmap
-6 - préciser la lices d'utilisation
-7 - ajouter les contributeurs
+ok 2 - ajouter pré-requi
+ok 3 - ajouter guide d'installation
+4 - vérifier le guide d'utilisation
+ok 5 - ajouter une roadmap
+ok 6 - préciser la licences d'utilisation
+ok 7 - ajouter les contributeurs
 8 - voir un readme template sur github pour l'adopter
- 
+9 - convention de nommage
+10 - stack
 -->
 
 # Ziky Versari — Site vitrine
@@ -41,7 +42,7 @@ Pages du site :
 | `/stages` | Stages et ateliers avec FAQ |
 | `/calendrier` | Agenda filtrable des événements à venir |
 | `/galerie` | Galerie photos par catégorie |
-| `/a-propos` | Biographie complète et parcours |
+| `/biographie` | Biographie complète et parcours |
 | `/contact` | Formulaire et informations de contact |
 | `/mentions-legales` | Mentions légales |
 
@@ -99,7 +100,7 @@ src/
 │   ├── stages.astro
 │   ├── calendrier.astro
 │   ├── galerie.astro
-│   ├── a-propos.astro
+│   ├── biographie.astro
 │   ├── contact.astro
 │   └── mentions-legales.astro
 ├── components/          # Composants réutilisables

@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+---
+
+<BaseLayout
+  title="404 | Ziky Versari"
+  description="La page demandée est introuvable."
+>
+  <section class="mx-auto flex min-h-[70vh] max-w-4xl flex-col items-center justify-center px-6 py-20 text-center">
+    <span class="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">Erreur 404</span>
+
+    <div class="mt-6 flex h-24 w-24 items-center justify-center rounded-full bg-muted font-serif text-4xl text-foreground">
+      404
+    </div>
+
+    <div class="mt-10">
+      <SectionHeading
+        label="Page introuvable"
+        title="Cette page n'existe pas ou n'est plus disponible"
+        description="Vous pouvez revenir à l'accueil, consulter les spectacles ou parcourir l'agenda."
+        class="items-center"
+      />
+    </div>
+
+    <div class="mt-12 flex flex-wrap justify-center gap-4">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all hover:scale-[1.02]"
+      >
+        Retour à l'accueil
+        <Icon name="arrow-right" class="h-4 w-4" />
+      </a>
+      <a
+        href="/spectacles"
+        class="inline-flex items-center gap-2 border border-border px-6 py-3 text-sm text-foreground transition-colors hover:border-foreground"
+      >
+        Voir les spectacles
+      </a>
+      <a
+        href="/calendrier"
+        class="inline-flex items-center gap-2 border border-border px-6 py-3 text-sm text-foreground transition-colors hover:border-foreground"
+      >
+        Voir l'agenda
+      </a>
+    </div>
+  </section>
+</BaseLayout>
