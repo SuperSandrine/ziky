@@ -1,7 +1,6 @@
 ---
 import EventsPreview from "../components/EventsPreview.astro";
 import HeroSection from "../components/HeroSection.astro";
-import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import ShowsPreview from "../components/ShowsPreview.astro";
 import WorkshopCard from "../components/WorkshopCard.astro";
@@ -9,6 +8,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { biography, pedagogyIntro, workshops } from "../data/site";
 import Icon from "../components/Icon.astro";
 import HeroSection2 from "@/components/HeroSection2.astro";
+import biographyPortrait from "../assets/images/portrait/contact 1.webp";
 ---
 
 <BaseLayout>
@@ -59,7 +59,12 @@ import HeroSection2 from "@/components/HeroSection2.astro";
 
   <section class="mx-auto max-w-6xl px-6 py-24">
     <div class="grid gap-12 md:grid-cols-[1fr_2fr]">
-      <ImagePlaceholder alt="Portrait de Ziky Versari" aspect="portrait" />
+      <img
+        src={biographyPortrait.src}
+        alt="Portrait de Ziky Versari"
+        class="h-full w-full rounded-sm object-cover"
+        loading="lazy"
+      />
       <div class="flex flex-col justify-center">
         <SectionHeading label="Biographie" title="Parcours" />
         <p class="mt-6 leading-relaxed text-muted-foreground">

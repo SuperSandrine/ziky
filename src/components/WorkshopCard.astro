@@ -2,6 +2,11 @@
 import type { Workshop } from "../data/site";
 import Icon from "./Icon.astro";
 import ImagePlaceholder from "./ImagePlaceholder.astro";
+import workshopAtelier from "../assets/images/stages/clown parent enfant.webp";
+import workshopDecouverte from "../assets/images/stages/decouverte du clown.webp";
+import workshopObjets from "../assets/images/stages/clown et ces objets.webp";
+import workshopPersonnage from "../assets/images/stages/clown et personnage (2).webp";
+import workshopApprofondi from "../assets/images/stages/clown approfondissement.webp";
 
 interface Props {
   workshop: Workshop;
@@ -9,6 +14,54 @@ interface Props {
 }
 
 const { workshop, compact = false } = Astro.props;
+
+const workshopImages = {
+  "atelier-adultes-enfants": {
+    src: workshopAtelier.src,
+    alt: "Atelier clown adultes-enfants",
+  },
+  "stage-decouverte": {
+    src: workshopDecouverte.src,
+    alt: "Stage clown decouverte",
+  },
+  "clown-et-objets": {
+    src: workshopObjets.src,
+    alt: "Le clown et ses objets",
+  },
+  "creation-personnage": {
+    src: workshopPersonnage.src,
+    alt: "Creation de personnage",
+  },
+  "stage-approfondi": {
+    src: workshopApprofondi.src,
+    alt: "Stage clown approfondi",
+  },
+} as const;
+
+const workshopImage = workshopImages[workshop.slug as keyof typeof workshopImages];
+
+// Adjust portrait framing here with Tailwind object-position classes when needed.
+// Example: "object-[50%_18%]" shows more of the top part of the image.
+const workshopImageCrop = {
+  "stage-decouverte": "object-[50%_30%]",
+  "creation-personnage": "object-[50%_15%]",
+} as const;
+
+const workshopImageCropClass =
+  workshopImageCrop[workshop.slug as keyof typeof workshopImageCrop] ?? "object-center";
+
+// Optional per-image color treatment.
+// Examples:
+// "brightness-110 saturate-125"
+// "brightness-105 saturate-125 sepia-[.12] hue-rotate-[-8deg]"
+const workshopImageTone = {
+  "stage-decouverte": "brightness-125 saturate-160 sepia-[.20]",
+  "creation-personnage": "brightness-100 saturate-165 sepia-[.30] hue-rotate-[-10deg] contrast-110",
+  "stage-approfondi": "brightness-140 saturate-190 sepia-[.20]",
+} as const;
+
+const workshopImageToneClass =
+  workshopImageTone[workshop.slug as keyof typeof workshopImageTone] ?? "";
 ---
 
 {
@@ -36,11 +89,26 @@ const { workshop, compact = false } = Astro.props;
   ) : (
     <article class="group flex flex-col gap-4">
       <div class="overflow-hidden rounded-sm">
-        <ImagePlaceholder
-          alt={workshop.imagePlaceholder}
-          aspect="video"
-          class="transition-transform duration-500 group-hover:scale-[1.03]"
-        />
+        {
+          workshopImage ? (
+            <img
+              src={workshopImage.src}
+              alt={workshopImage.alt}
+              class:list={[
+                "aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]",
+                workshopImageCropClass,
+                workshopImageToneClass,
+              ]}
+              loading="lazy"
+            />
+          ) : (
+            <ImagePlaceholder
+              alt={workshop.imagePlaceholder}
+              aspect="video"
+              class="transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          )
+        }
       </div>
       <div class="flex flex-col gap-2">
         <h3 class="font-serif text-xl text-foreground">{workshop.title}</h3>

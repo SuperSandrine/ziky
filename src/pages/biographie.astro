@@ -2,10 +2,25 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { biography, biographyTimeline, companies, formations } from "../data/site";
 import Icon from "../components/Icon.astro";
-import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import SectionHeading from "../components/SectionHeading.astro";
+import biographyPortrait from "../assets/images/portrait/contact 1.webp";
+import biographyImageOne from "../assets/images/portrait/biographie.webp";
+import biographyImageTwo from "../assets/images/portrait/biographie (2).webp";
+import biographyImageThree from "../assets/images/portrait/biographie 3.webp";
+import homePortrait from "../assets/images/portrait/photo d'acueil.webp";
 
 const paragraphs = biography.full.split("\n\n");
+const biographyGallery = [
+  { src: biographyImageOne.src, alt: "Ziky Versari en biographie 1" },
+  { src: biographyImageTwo.src, alt: "Ziky Versari en biographie 2" },
+  { src: biographyImageThree.src, alt: "Ziky Versari en biographie 3" },
+  { src: biographyPortrait.src, alt: "Portrait de Ziky Versari" },
+  {
+    src: homePortrait.src,
+    alt: "Photo d'accueil de Ziky Versari",
+    imageClassName: "object-[10%_22%]",
+  },
+];
 
 const disciplineIcons: Record<string, string> = {
   Clown: "C",
@@ -26,7 +41,12 @@ const disciplineIcons: Record<string, string> = {
 
     <div class="mt-16 grid gap-12 md:grid-cols-[2fr_3fr]">
       <div class="flex flex-col gap-4">
-        <ImagePlaceholder alt="Portrait de Ziky Versari" aspect="portrait" class="shadow-lg" />
+        <img
+          src={biographyPortrait.src}
+          alt="Portrait de Ziky Versari"
+          class="aspect-[3/4] w-full rounded-sm object-cover shadow-lg"
+          loading="lazy"
+        />
         <p class="text-center text-xs text-muted-foreground">
           Ziky Versari - Photo : crédit à venir
         </p>
@@ -49,6 +69,30 @@ const disciplineIcons: Record<string, string> = {
       {paragraphs.slice(3).map((paragraph) => (
         <p class="leading-relaxed text-muted-foreground">{paragraph}</p>
       ))}
+    </div>
+
+    <div class="mx-auto mt-16 max-w-5xl border-t border-border pt-12">
+      <h3 class="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+        Galerie
+      </h3>
+      <p class="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
+        Quelques images pour traverser le parcours, les matières de jeu et les présences qui accompagnent le travail de Ziky Versari.
+      </p>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {biographyGallery.map((image) => (
+          <figure class="overflow-hidden rounded-sm bg-muted">
+            <img
+              src={image.src}
+              alt={image.alt}
+              class:list={[
+                "h-72 w-full object-cover transition-transform duration-500 hover:scale-[1.03]",
+                image.imageClassName,
+              ]}
+              loading="lazy"
+            />
+          </figure>
+        ))}
+      </div>
     </div>
 
     <div class="mx-auto mt-16 max-w-3xl border-t border-border pt-12">
