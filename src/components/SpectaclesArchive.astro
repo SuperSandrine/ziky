@@ -10,6 +10,30 @@ interface Props {
 
 const { shows } = Astro.props;
 
+const yearValue = (year: string) => {
+  const match = year.match(/\d{4}/);
+  return match ? Number(match[0]) : Number.NEGATIVE_INFINITY;
+};
+
+const sortedShows = [...shows].sort((a, b) => {
+  const yearDiff = yearValue(b.year) - yearValue(a.year);
+  if (yearDiff !== 0) return yearDiff;
+  return a.title.localeCompare(b.title, "fr");
+});
+
+const showsByYear = sortedShows.reduce(
+  (groups, show) => {
+    const existing = groups.find((group) => group.year === show.year);
+    if (existing) {
+      existing.shows.push(show);
+    } else {
+      groups.push({ year: show.year, shows: [show] });
+    }
+    return groups;
+  },
+  [] as { year: string; shows: Show[] }[],
+);
+
 const statusLabel: Record<string, string> = {
   "en-tournee": "En tournée",
   "en-creation": "En création",
@@ -22,11 +46,11 @@ const typeLabel: Record<string, string> = {
   collectif: "Collectif",
 };
 
-const disciplines = ["Clown", "Écriture", "Interprétation", "Mise en scène", "Cofondatrice"];
+// const disciplines = ["Clown", "Écriture", "Interprétation", "Mise en scène", "Cofondatrice"];
 ---
 
 <div data-spectacles-archive>
-  <div class="mt-12 flex flex-col gap-4">
+  <!-- <div class="mt-12 flex flex-col gap-4">
     <div class="relative max-w-sm">
       <Icon name="arrow-right" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 rotate-180 text-muted-foreground" />
       <input
@@ -35,9 +59,9 @@ const disciplines = ["Clown", "Écriture", "Interprétation", "Mise en scène", 
         class="w-full rounded-sm border border-input bg-card py-2.5 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         data-search
       />
-    </div>
+    </div> -->
 
-    <div class="flex flex-wrap gap-2">
+    <!-- <div class="flex flex-wrap gap-2">
       {disciplines.map((discipline) => (
         <button
           type="button"
@@ -54,80 +78,90 @@ const disciplines = ["Clown", "Écriture", "Interprétation", "Mise en scène", 
       >
         <Icon name="x" class="h-3 w-3" /> Réinitialiser
       </button>
-    </div>
+    </div> 
 
     <p class="hidden text-xs text-muted-foreground" data-results-count></p>
-  </div>
+  </div>-->
 
   <div class="mt-12 flex flex-col gap-20" data-results>
-    {shows.map((show) => (
-      <article
-        id={show.slug}
-        class="group grid gap-8 scroll-mt-24 md:grid-cols-2"
-        data-show
-        data-title={show.title.toLowerCase()}
-        data-description={show.shortDescription.toLowerCase()}
-        data-roles={show.roles.join("|")}
-      >
-        <a href={`/spectacles/${show.slug}`} class="overflow-hidden rounded-sm">
-          {showMedia[show.slug]?.cover ? (
-            <img
-              src={showMedia[show.slug].cover.src}
-              alt={showMedia[show.slug].cover.alt}
-              class="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-              loading="lazy"
-            />
-          ) : (
-            <ImagePlaceholder
-              alt={show.imagePlaceholder}
-              aspect="video"
-              class="transition-transform duration-500 group-hover:scale-[1.03]"
-            />
-          )}
-        </a>
-        <div class="flex flex-col justify-center gap-4">
-          <div class="flex items-center gap-3">
-            <span class="text-xs font-medium uppercase tracking-wider text-accent">
-              {statusLabel[show.status]}
-            </span>
-            <span class="text-xs text-muted-foreground">{show.year}</span>
-            <span class="border border-border px-2 py-0.5 text-[11px] text-muted-foreground">
-              {typeLabel[show.type]}
-            </span>
-          </div>
-          <a href={`/spectacles/${show.slug}`}>
-            <h2 class="font-serif text-3xl text-foreground transition-colors hover:text-accent">
-              {show.title}
-            </h2>
-          </a>
-          <p class="leading-relaxed text-muted-foreground">{show.shortDescription}</p>
-          <div class="flex flex-wrap gap-2">
-            {show.roles.map((role) => (
-              <span class="border border-border px-3 py-1 text-xs tracking-wide text-muted-foreground">
-                {role}
-              </span>
-            ))}
-          </div>
-          <div class="flex items-center gap-4 pt-2">
-            <a
-              href={`/spectacles/${show.slug}`}
-              class="text-sm text-foreground underline underline-offset-4 transition-colors hover:text-accent"
-            >
-              En savoir plus
-            </a>
-            {show.externalLink && (
-              <a
-                href={show.externalLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Site <Icon name="arrow-up-right" class="h-3 w-3" />
-              </a>
-            )}
-          </div>
+    {showsByYear.map((group) => (
+      <section class="flex flex-col gap-10" data-year-group={group.year}>
+        <div class="border-b border-border pb-3">
+          <h2 class="font-serif text-3xl text-foreground">{group.year}</h2>
         </div>
-      </article>
+
+        <div class="flex flex-col gap-16">
+          {group.shows.map((show) => (
+            <article
+              id={show.slug}
+              class="group grid gap-8 scroll-mt-24 md:grid-cols-2"
+              data-show
+              data-title={show.title.toLowerCase()}
+              data-description={show.shortDescription.toLowerCase()}
+              data-roles={show.roles.join("|")}
+            >
+              <a href={`/spectacles/${show.slug}`} class="overflow-hidden rounded-sm">
+                {showMedia[show.slug]?.cover ? (
+                  <img
+                    src={showMedia[show.slug].cover.src}
+                    alt={showMedia[show.slug].cover.alt}
+                    class="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
+                ) : (
+                  <ImagePlaceholder
+                    alt={show.imagePlaceholder}
+                    aspect="video"
+                    class="transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                )}
+              </a>
+              <div class="flex flex-col justify-center gap-4">
+                <div class="flex items-center gap-3">
+                  <span class="text-xs font-medium uppercase tracking-wider text-accent">
+                    {statusLabel[show.status]}
+                  </span>
+                  <span class="text-xs text-muted-foreground">{show.year}</span>
+                  <span class="border border-border px-2 py-0.5 text-[11px] text-muted-foreground">
+                    {typeLabel[show.type]}
+                  </span>
+                </div>
+                <a href={`/spectacles/${show.slug}`}>
+                  <h3 class="font-serif text-3xl text-foreground transition-colors hover:text-accent">
+                    {show.title}
+                  </h3>
+                </a>
+                <p class="leading-relaxed text-muted-foreground">{show.shortDescription}</p>
+                <div class="flex flex-wrap gap-2">
+                  {show.roles.map((role) => (
+                    <span class="border border-border px-3 py-1 text-xs tracking-wide text-muted-foreground">
+                      {role}
+                    </span>
+                  ))}
+                </div>
+                <div class="flex items-center gap-4 pt-2">
+                  <a
+                    href={`/spectacles/${show.slug}`}
+                    class="text-sm text-foreground underline underline-offset-4 transition-colors hover:text-accent"
+                  >
+                    En savoir plus
+                  </a>
+                  {show.externalLink && (
+                    <a
+                      href={show.externalLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      Site <Icon name="arrow-up-right" class="h-3 w-3" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
     ))}
   </div>
 
@@ -139,7 +173,7 @@ const disciplines = ["Clown", "Écriture", "Interprétation", "Mise en scène", 
   </div>
 </div>
 
-<script>
+<!-- <script>
   const root = document.querySelector("[data-spectacles-archive]");
   if (root) {
     const search = root.querySelector("[data-search]");
@@ -208,4 +242,4 @@ const disciplines = ["Clown", "Écriture", "Interprétation", "Mise en scène", 
     emptyReset?.addEventListener("click", clearAll);
     sync();
   }
-</script>
+</script> -->

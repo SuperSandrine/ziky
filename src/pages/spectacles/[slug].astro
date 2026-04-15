@@ -42,13 +42,13 @@ const media = showMedia[show.slug];
       <img
         src={media.cover.src}
         alt={media.cover.alt}
-        class="aspect-[16/7] w-full object-cover"
+        class="aspect-video w-full object-cover"
         loading="eager"
       />
     ) : (
       <ImagePlaceholder alt={show.imagePlaceholder} aspect="wide" class="w-full" />
     )}
-    <div class="absolute inset-0 bg-gradient-to-t from-foreground/70 via-transparent to-foreground/20"></div>
+    <div class="absolute inset-0 bg-linear-to-t from-foreground/70 via-transparent to-foreground/20"></div>
     <div class="absolute inset-x-0 bottom-0 px-6 pb-10">
       <div class="mx-auto max-w-6xl">
         <nav class="mb-4 flex items-center gap-2 text-xs text-background/60" aria-label="Fil d'Ariane">
@@ -91,22 +91,23 @@ const media = showMedia[show.slug];
             Galerie
           </h2>
           {media?.gallery?.length ? (
-            <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
+            <div class="flex gap-4">
               {media.gallery.map((image) => (
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  class="aspect-video w-full object-cover"
-                  loading="lazy"
-                />
+                <figure class="overflow-hidden rounded-sm bg-muted">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    class:list={[
+                      "w-full object-cover",
+                      image.height > image.width ? "aspect-3/4" : "aspect-4/3",
+                    ]}
+                    loading="lazy"
+                  />
+                </figure>
               ))}
             </div>
           ) : (
-            <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
-              {[1, 2, 3].map((index) => (
-                <ImagePlaceholder alt={`${show.title} - photo ${index}`} aspect="video" />
-              ))}
-            </div>
+            <p class="text-lg leading-relaxed text-foreground">Bientôt, des images !</p>
           )}
         </div>
 

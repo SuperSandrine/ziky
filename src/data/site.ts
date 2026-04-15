@@ -74,7 +74,7 @@ export const shows: Show[] = [
   {
     slug: "baignoire",
     title: "Baignoire",
-    year: "En création",
+    year: "2026",
     status: "en-creation",
     type: "solo",
     roles: ["Clown", "Écriture", "Interprétation"],
@@ -85,7 +85,7 @@ export const shows: Show[] = [
   {
     slug: "a-cote",
     title: "À côté",
-    year: "En tournée",
+    year: "2025",
     status: "en-tournee",
     type: "duo",
     roles: ["Clown", "Interprétation"],
@@ -97,7 +97,7 @@ export const shows: Show[] = [
   {
     slug: "la-lutte-finale",
     title: "La Lutte Finale",
-    year: "En création",
+    year: "2026",
     status: "en-creation",
     type: "collectif",
     roles: ["Clown", "Écriture"],
@@ -150,24 +150,7 @@ export const shows: Show[] = [
 ];
 
 export const workshops: Workshop[] = [
-  {
-    slug: "atelier-adultes-enfants",
-    title: "Atelier clown adultes-enfants",
-    duration: "1 journée (9h30 - 16h30)",
-    maxParticipants: 10,
-    audience: "5 binômes adulte-enfant, tous niveaux",
-    description:
-      "Une journée pour jouer ensemble dans un cadre de coopération et de complicité en dehors des rapports de domination, à la rencontre d'une malice commune.",
-    program: [
-      "Matinée de présentation et jeux découverte : la scène, le personnage, la palette d'émotions",
-      "Temps informel et auberge espagnole",
-      "Après-midi de jeu autour du costume, du maquillage et de la mise en scène",
-      "Temps d'improvisation en binôme",
-      "Goûter convivial et cercle de clôture",
-    ],
-    imagePlaceholder: "Photo atelier adultes-enfants",
-  },
-  {
+    {
     slug: "stage-decouverte",
     title: "Stage clown découverte",
     duration: "2 jours",
@@ -206,6 +189,23 @@ export const workshops: Workshop[] = [
     description:
       "5 jours en immersion complète dans l'univers du clown : découverte du monde de la scène et création de personnage, exploration de son univers, sa palette d'émotions et sa relation à l'objet. Travail de la dramaturgie, écriture et mise en place de son propre numéro de clown, transmission d'outils pour devenir son propre metteurice en scène.",
     imagePlaceholder: "Photo stage approfondi",
+  },
+  {
+    slug: "atelier-adultes-enfants",
+    title: "Atelier clown adultes-enfants",
+    duration: "1 journée (9h30 - 16h30)",
+    maxParticipants: 10,
+    audience: "5 binômes adulte-enfant, tous niveaux",
+    description:
+      "Une journée pour jouer ensemble dans un cadre de coopération et de complicité en dehors des rapports de domination, à la rencontre d'une malice commune.",
+    program: [
+      "Matinée de présentation et jeux découverte : la scène, le personnage, la palette d'émotions",
+      "Temps informel et auberge espagnole",
+      "Après-midi de jeu autour du costume, du maquillage et de la mise en scène",
+      "Temps d'improvisation en binôme",
+      "Goûter convivial et cercle de clôture",
+    ],
+    imagePlaceholder: "Photo atelier adultes-enfants",
   },
 ];
 
@@ -387,7 +387,7 @@ export const faqItems = [
   {
     question: "Faut-il avoir de l'expérience pour participer ?",
     answer:
-      "Non, la plupart des ateliers et stages sont ouverts à tous les niveaux. Seul le stage approfondi requiert un niveau intermédiaire. L'approche est toujours bienveillante et progressive.",
+      "Non, la plupart des ateliers et stages sont ouverts à tous les niveaux.",
   },
   {
     question: "Faut-il réserver ?",
@@ -397,12 +397,12 @@ export const faqItems = [
   {
     question: "Quel matériel apporter ?",
     answer:
-      "Venez avec des vêtements confortables dans lesquels vous pouvez bouger. Pour les stages incluant costume ou maquillage, une liste complémentaire peut être transmise en amont.",
+      "Venez avec des vêtements confortables dans lesquels vous pouvez bouger (sans valeur), une gourde et un petit plaid.",
   },
   {
     question: "Quel est le tarif des stages ?",
     answer:
-      "Les tarifs varient selon la durée et le format de l'atelier. Contactez-moi pour obtenir les informations détaillées.",
+      "Les tarifs varient selon la durée et le format de l’atelier. N’hésitez pas à me contacter pour obtenir des informations détaillées. Le tarif ne doit pas être un frein: des tarifs solidaires sont possibles.",
   },
   {
     question: "Où se déroulent les stages ?",

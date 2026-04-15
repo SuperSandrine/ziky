@@ -1,12 +1,21 @@
+import type { ImageMetadata } from "astro";
 import type { GalleryImage } from "./site";
 
 import aCotePrimary from "../assets/images/spectacles/principal de Acote.webp";
 import baignoirePrimary from "../assets/images/spectacles/projet baignoire principal.webp";
 import laLutteFinalePrimary from "../assets/images/spectacles/principal la lutte final.webp";
+import aCoteMiniatureOne from "../assets/images/spectacles/miniature acote.JPG";
+import aCoteMiniatureTwo from "../assets/images/spectacles/miniature acote (2).JPG";
+import aCoteMiniatureThree from "../assets/images/spectacles/miniature acote 3.JPG";
+import laLutteFinaleMiniatureOne from "../assets/images/spectacles/miniature la lutte final.jpg";
+import laLutteFinaleMiniatureTwo from "../assets/images/spectacles/miniature la lutte final (2).jpg";
+import laLutteFinaleMiniatureThree from "../assets/images/spectacles/miniature la lutte final (3).jpg";
 
 export interface ShowMediaImage {
   src: string;
   alt: string;
+  width: number;
+  height: number;
 }
 
 export interface ShowMediaEntry {
@@ -14,41 +23,32 @@ export interface ShowMediaEntry {
   gallery: ShowMediaImage[];
 }
 
+const toShowMediaImage = (asset: ImageMetadata, alt: string): ShowMediaImage => ({
+  src: asset.src,
+  alt,
+  width: asset.width,
+  height: asset.height,
+});
+
 export const showMedia: Record<string, ShowMediaEntry> = {
   "a-cote": {
-    cover: {
-      src: aCotePrimary.src,
-      alt: "À côté",
-    },
+    cover: toShowMediaImage(aCotePrimary, "À côté"),
     gallery: [
-      {
-        src: aCotePrimary.src,
-        alt: "À côté - visuel principal",
-      },
+      toShowMediaImage(aCoteMiniatureOne, "À côté - miniature 1"),
+      toShowMediaImage(aCoteMiniatureTwo, "À côté - miniature 2"),
+      toShowMediaImage(aCoteMiniatureThree, "À côté - miniature 3"),
     ],
   },
   baignoire: {
-    cover: {
-      src: baignoirePrimary.src,
-      alt: "Baignoire",
-    },
-    gallery: [
-      {
-        src: baignoirePrimary.src,
-        alt: "Baignoire - visuel principal",
-      },
-    ],
+    cover: toShowMediaImage(baignoirePrimary, "Baignoire"),
+    gallery: [],
   },
   "la-lutte-finale": {
-    cover: {
-      src: laLutteFinalePrimary.src,
-      alt: "La Lutte Finale",
-    },
+    cover: toShowMediaImage(laLutteFinalePrimary, "La Lutte Finale"),
     gallery: [
-      {
-        src: laLutteFinalePrimary.src,
-        alt: "La Lutte Finale - visuel principal",
-      },
+      toShowMediaImage(laLutteFinaleMiniatureOne, "La Lutte Finale - miniature 1"),
+      toShowMediaImage(laLutteFinaleMiniatureTwo, "La Lutte Finale - miniature 2"),
+      toShowMediaImage(laLutteFinaleMiniatureThree, "La Lutte Finale - miniature 3"),
     ],
   },
 };
@@ -63,4 +63,3 @@ export const showGalleryImages: GalleryImage[] = Object.entries(showMedia).flatM
       showSlug,
     })),
 );
-
