@@ -1,5 +1,6 @@
 ---
 import { shows } from "../data/site";
+import { showMedia } from "../data/show-media";
 import Icon from "./Icon.astro";
 import ImagePlaceholder from "./ImagePlaceholder.astro";
 import SectionHeading from "./SectionHeading.astro";
@@ -11,7 +12,7 @@ const featured = shows
 
 <section class="mx-auto max-w-6xl px-6 py-24">
   <div class="flex items-end justify-between">
-    <SectionHeading label="En ce moment" title="Mes spectacles" />
+    <SectionHeading  title="Mes spectacles" />
     <a
       href="/spectacles"
       class="hidden items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground md:flex"
@@ -21,43 +22,56 @@ const featured = shows
   </div>
 
   <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-    {featured.map((show) => (
-      <a
-        href={`/spectacles/${show.slug}`}
-        class="group relative flex flex-col overflow-hidden rounded-sm"
-      >
-        <div class="relative aspect-[4/3] overflow-hidden">
-          <ImagePlaceholder
-            alt={show.imagePlaceholder}
-            aspect="square"
-            class="h-full w-full transition-transform duration-700 group-hover:scale-[1.05]"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-60 transition-opacity group-hover:opacity-80"></div>
-          <span class="absolute right-3 top-3 bg-background/90 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground">
-            {show.year}
-          </span>
-          <div class="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-5">
-            <h3 class="font-serif text-2xl text-background">{show.title}</h3>
-            <div class="flex flex-wrap gap-1.5">
-              {show.roles.slice(0, 3).map((role) => (
-                <span class="bg-background/20 px-2 py-0.5 text-[10px] tracking-wider text-background/80 backdrop-blur-sm">
-                  {role}
-                </span>
-              ))}
-            </div>
-            <p class="mt-1 translate-y-2 text-sm text-background/70 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 line-clamp-2">
-              {show.shortDescription}
-            </p>
-            <span
-              class="mt-2 inline-flex translate-y-2 items-center gap-1 text-sm font-medium text-background opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-              style="transition-delay: 50ms;"
-            >
-              Voir le spectacle <Icon name="arrow-right" class="h-3.5 w-3.5" />
+    {featured.map((show) => {
+      const media = showMedia[show.slug];
+
+      return (
+        <a
+          href={`/spectacles/${show.slug}`}
+          class="group relative flex flex-col overflow-hidden rounded-sm"
+        >
+          <div class="relative aspect-[4/3] overflow-hidden">
+            {media?.cover ? (
+              <img
+                src={media.cover.src}
+                alt={media.cover.alt}
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                loading="lazy"
+              />
+            ) : (
+              <ImagePlaceholder
+                alt={show.imagePlaceholder}
+                aspect="square"
+                class="h-full w-full transition-transform duration-700 group-hover:scale-[1.05]"
+              />
+            )}
+            <div class="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-60 transition-opacity group-hover:opacity-80"></div>
+            <span class="absolute right-3 top-3 bg-background/90 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground">
+              {show.year}
             </span>
+            <div class="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-5">
+              <h3 class="font-serif text-2xl text-background">{show.title}</h3>
+              <div class="flex flex-wrap gap-1.5">
+                {show.roles.slice(0, 3).map((role) => (
+                  <span class="bg-background/20 px-2 py-0.5 text-[10px] tracking-wider text-background/80 backdrop-blur-sm">
+                    {role}
+                  </span>
+                ))}
+              </div>
+              <p class="mt-1 translate-y-2 text-sm text-background/70 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 line-clamp-2">
+                {show.shortDescription}
+              </p>
+              <span
+                class="mt-2 inline-flex translate-y-2 items-center gap-1 text-sm font-medium text-background opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+                style="transition-delay: 50ms;"
+              >
+                Voir le spectacle <Icon name="arrow-right" class="h-3.5 w-3.5" />
+              </span>
+            </div>
           </div>
-        </div>
-      </a>
-    ))}
+        </a>
+      );
+    })}
   </div>
 
   <a

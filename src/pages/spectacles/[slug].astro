@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { calendarEvents, contactEmail, shows } from "../../data/site";
+import { showMedia } from "../../data/show-media";
 import Icon from "../../components/Icon.astro";
 import ImagePlaceholder from "../../components/ImagePlaceholder.astro";
 
@@ -14,8 +15,8 @@ export function getStaticPaths() {
 const { show } = Astro.props;
 
 const statusLabel: Record<string, string> = {
-  "en-tournee": "En tournee",
-  "en-creation": "En creation",
+  "en-tournee": "En tournée",
+  "en-creation": "En création",
   archive: "Archive",
 };
 
@@ -32,11 +33,21 @@ const upcomingDates = calendarEvents.filter(
     event.type === "spectacle" &&
     new Date(event.date) >= new Date(),
 );
+const media = showMedia[show.slug];
 ---
 
 <BaseLayout title={`${show.title} | Ziky Versari`} description={show.shortDescription}>
   <div class="relative">
-    <ImagePlaceholder alt={show.imagePlaceholder} aspect="wide" class="w-full" />
+    {media?.cover ? (
+      <img
+        src={media.cover.src}
+        alt={media.cover.alt}
+        class="aspect-[16/7] w-full object-cover"
+        loading="eager"
+      />
+    ) : (
+      <ImagePlaceholder alt={show.imagePlaceholder} aspect="wide" class="w-full" />
+    )}
     <div class="absolute inset-0 bg-gradient-to-t from-foreground/70 via-transparent to-foreground/20"></div>
     <div class="absolute inset-x-0 bottom-0 px-6 pb-10">
       <div class="mx-auto max-w-6xl">
@@ -79,11 +90,24 @@ const upcomingDates = calendarEvents.filter(
           <h2 class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
             Galerie
           </h2>
-          <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
-            {[1, 2, 3].map((index) => (
-              <ImagePlaceholder alt={`${show.title} - photo ${index}`} aspect="video" />
-            ))}
-          </div>
+          {media?.gallery?.length ? (
+            <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
+              {media.gallery.map((image) => (
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  class="aspect-video w-full object-cover"
+                  loading="lazy"
+                />
+              ))}
+            </div>
+          ) : (
+            <div class="grid grid-cols-2 gap-3 md:grid-cols-3">
+              {[1, 2, 3].map((index) => (
+                <ImagePlaceholder alt={`${show.title} - photo ${index}`} aspect="video" />
+              ))}
+            </div>
+          )}
         </div>
 
         {upcomingDates.length > 0 && (
@@ -106,7 +130,7 @@ const upcomingDates = calendarEvents.filter(
                     <p class="text-xs text-muted-foreground">{event.location}</p>
                   </div>
                   <a href="/calendrier" class="text-xs text-foreground underline underline-offset-4">
-                    Details
+                    Détails
                   </a>
                 </div>
               ))}
@@ -130,7 +154,7 @@ const upcomingDates = calendarEvents.filter(
               <span class="ml-auto text-foreground">{statusLabel[show.status]}</span>
             </div>
             <div class="flex items-center gap-3 text-sm">
-              <span class="text-muted-foreground">Annee</span>
+              <span class="text-muted-foreground">Année</span>
               <span class="ml-auto text-foreground">{show.year}</span>
             </div>
           </div>
@@ -138,7 +162,7 @@ const upcomingDates = calendarEvents.filter(
           <hr class="border-border" />
 
           <div>
-            <h4 class="mb-2 text-xs text-muted-foreground">Roles</h4>
+            <h4 class="mb-2 text-xs text-muted-foreground">Rôles</h4>
             <div class="flex flex-wrap gap-1.5">
               {show.roles.map((role) => (
                 <span class="border border-border px-2.5 py-1 text-xs text-foreground">{role}</span>
@@ -177,7 +201,16 @@ const upcomingDates = calendarEvents.filter(
                   href={`/spectacles/${item.slug}`}
                   class="group flex gap-3 border-b border-border pb-3 transition-colors last:border-0"
                 >
-                  <ImagePlaceholder alt={item.imagePlaceholder} aspect="video" class="w-20 shrink-0" />
+                  {showMedia[item.slug]?.cover ? (
+                    <img
+                      src={showMedia[item.slug].cover.src}
+                      alt={showMedia[item.slug].cover.alt}
+                      class="aspect-video w-20 shrink-0 object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <ImagePlaceholder alt={item.imagePlaceholder} aspect="video" class="w-20 shrink-0" />
+                  )}
                   <div class="flex flex-col gap-1">
                     <span class="font-serif text-sm text-foreground transition-colors group-hover:text-accent">
                       {item.title}

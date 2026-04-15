@@ -2,6 +2,7 @@
 import GalleryGrid from "../components/GalleryGrid.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import { galleryImages } from "../data/site";
+import { showGalleryImages } from "../data/show-media";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const categories = [
@@ -11,6 +12,8 @@ const categories = [
   { key: "portrait", label: "Portraits" },
   { key: "coulisses", label: "Coulisses" },
 ] as const;
+
+const images = [...showGalleryImages, ...galleryImages];
 ---
 
 <BaseLayout
@@ -24,6 +27,6 @@ const categories = [
       description="Images de spectacles, ateliers, portraits et coulisses."
     />
 
-    <GalleryGrid images={galleryImages} categories={categories} />
+    <GalleryGrid images={images} categories={categories} />
   </div>
 </BaseLayout>

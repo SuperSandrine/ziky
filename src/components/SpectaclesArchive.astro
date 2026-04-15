@@ -1,5 +1,6 @@
 ---
 import type { Show } from "../data/site";
+import { showMedia } from "../data/show-media";
 import Icon from "./Icon.astro";
 import ImagePlaceholder from "./ImagePlaceholder.astro";
 
@@ -10,8 +11,8 @@ interface Props {
 const { shows } = Astro.props;
 
 const statusLabel: Record<string, string> = {
-  "en-tournee": "En tournee",
-  "en-creation": "En creation",
+  "en-tournee": "En tournée",
+  "en-creation": "En création",
   archive: "Archive",
 };
 
@@ -21,7 +22,7 @@ const typeLabel: Record<string, string> = {
   collectif: "Collectif",
 };
 
-const disciplines = ["Clown", "Ecriture", "Interpretation", "Mise en scene", "Cofondatrice"];
+const disciplines = ["Clown", "Écriture", "Interprétation", "Mise en scène", "Cofondatrice"];
 ---
 
 <div data-spectacles-archive>
@@ -51,7 +52,7 @@ const disciplines = ["Clown", "Ecriture", "Interpretation", "Mise en scene", "Co
         class="hidden items-center gap-1 px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
         data-reset
       >
-        <Icon name="x" class="h-3 w-3" /> Reinitialiser
+        <Icon name="x" class="h-3 w-3" /> Réinitialiser
       </button>
     </div>
 
@@ -69,11 +70,20 @@ const disciplines = ["Clown", "Ecriture", "Interpretation", "Mise en scene", "Co
         data-roles={show.roles.join("|")}
       >
         <a href={`/spectacles/${show.slug}`} class="overflow-hidden rounded-sm">
-          <ImagePlaceholder
-            alt={show.imagePlaceholder}
-            aspect="video"
-            class="transition-transform duration-500 group-hover:scale-[1.03]"
-          />
+          {showMedia[show.slug]?.cover ? (
+            <img
+              src={showMedia[show.slug].cover.src}
+              alt={showMedia[show.slug].cover.alt}
+              class="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              loading="lazy"
+            />
+          ) : (
+            <ImagePlaceholder
+              alt={show.imagePlaceholder}
+              aspect="video"
+              class="transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          )}
         </a>
         <div class="flex flex-col justify-center gap-4">
           <div class="flex items-center gap-3">
@@ -122,7 +132,7 @@ const disciplines = ["Clown", "Ecriture", "Interpretation", "Mise en scene", "Co
   </div>
 
   <div class="hidden flex-col items-center gap-4 py-20 text-center" data-empty-state>
-    <p class="text-muted-foreground">Aucun spectacle ne correspond a votre recherche.</p>
+    <p class="text-muted-foreground">Aucun spectacle ne correspond à votre recherche.</p>
     <button type="button" class="text-sm text-foreground underline underline-offset-4" data-empty-reset>
       Voir tous les spectacles
     </button>
@@ -159,7 +169,7 @@ const disciplines = ["Clown", "Ecriture", "Interpretation", "Mise en scene", "Co
 
       const hasFilters = Boolean(query) || selectedRoles.size > 0;
       if (count) {
-        count.textContent = `${visible} spectacle${visible > 1 ? "s" : ""} trouve${visible > 1 ? "s" : ""}`;
+        count.textContent = `${visible} spectacle${visible > 1 ? "s" : ""} trouvé${visible > 1 ? "s" : ""}`;
         count.classList.toggle("hidden", !hasFilters);
       }
       reset?.classList.toggle("hidden", !hasFilters);

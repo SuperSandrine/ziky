@@ -59,7 +59,7 @@ export interface BiographyMilestone {
   description: string;
 }
 
-export const contactEmail = "bonjour@ziky-versari.fr";
+export const contactEmail = "ziky.versari@gmail.com";
 
 export const navigation = [
   { label: "Spectacles", href: "/spectacles" },
@@ -74,34 +74,34 @@ export const shows: Show[] = [
   {
     slug: "baignoire",
     title: "Baignoire",
-    year: "En creation",
+    year: "En création",
     status: "en-creation",
     type: "solo",
-    roles: ["Clown", "Ecriture", "Interpretation"],
+    roles: ["Clown", "Écriture", "Interprétation"],
     shortDescription:
-      "Un solo en cours de creation explorant la rencontre entre le corps et les objets du quotidien.",
+      "Un solo en cours de création explorant la rencontre entre le corps et les objets du quotidien.",
     imagePlaceholder: "Photo de Baignoire",
   },
   {
     slug: "a-cote",
-    title: "A cote",
-    year: "En tournee",
+    title: "À côté",
+    year: "En tournée",
     status: "en-tournee",
     type: "duo",
-    roles: ["Clown", "Interpretation"],
+    roles: ["Clown", "Interprétation"],
     shortDescription:
-      "Elvira, tranquille dans sa petite maison, voit sa vie chamboule quand Padock debarque juste a cote : entre leurs caracteres opposes, la cohabitation promet d'etre explosif !",
+      "Elvira, tranquille dans sa petite maison, voit sa vie chamboulée quand Padock débarque juste à côté : entre leurs caractères opposés, la cohabitation promet d'être explosive !",
     externalLink: "https://acoteclown.wixsite.com/acote",
-    imagePlaceholder: "Photo de A cote",
+    imagePlaceholder: "Photo de À côté",
   },
   {
     slug: "la-lutte-finale",
     title: "La Lutte Finale",
-    year: "En creation",
+    year: "En création",
     status: "en-creation",
     type: "collectif",
-    roles: ["Clown", "Ecriture"],
-    shortDescription: "Projet collectif en cours de creation.",
+    roles: ["Clown", "Écriture"],
+    shortDescription: "Projet collectif en cours de création.",
     imagePlaceholder: "Photo de La Lutte Finale",
   },
   // {
@@ -153,29 +153,29 @@ export const workshops: Workshop[] = [
   {
     slug: "atelier-adultes-enfants",
     title: "Atelier clown adultes-enfants",
-    duration: "1 journee (9h30 - 16h30)",
+    duration: "1 journée (9h30 - 16h30)",
     maxParticipants: 10,
-    audience: "5 binomes adulte-enfant, tous niveaux",
+    audience: "5 binômes adulte-enfant, tous niveaux",
     description:
-      "Une journee pour jouer ensemble dans un cadre de cooperation et de complicite en dehors des rapports de domination, a la rencontre d'une malice commune.",
+      "Une journée pour jouer ensemble dans un cadre de coopération et de complicité en dehors des rapports de domination, à la rencontre d'une malice commune.",
     program: [
-      "Matinee de presentation et jeux decouverte : la scene, le personnage, la palette d'emotions",
+      "Matinée de présentation et jeux découverte : la scène, le personnage, la palette d'émotions",
       "Temps informel et auberge espagnole",
-      "Apres-midi de jeu autour du costume, du maquillage et de la mise en scene",
-      "Temps d'improvisation en binome",
-      "Gouter convivial et cercle de cloture",
+      "Après-midi de jeu autour du costume, du maquillage et de la mise en scène",
+      "Temps d'improvisation en binôme",
+      "Goûter convivial et cercle de clôture",
     ],
     imagePlaceholder: "Photo atelier adultes-enfants",
   },
   {
     slug: "stage-decouverte",
-    title: "Stage clown decouverte",
+    title: "Stage clown découverte",
     duration: "2 jours",
     maxParticipants: 12,
     audience: "Tous niveaux",
     description:
-      "Deux jours pour decouvrir le monde du clown et rencontrer sa propre palette de jeu. Experimentations en groupe a partir des emotions du moment et temps d'impro.",
-    imagePlaceholder: "Photo stage decouverte",
+      "Deux jours pour découvrir le monde du clown et rencontrer sa propre palette de jeu. Expérimentations en groupe à partir des émotions du moment et temps d'impro.",
+    imagePlaceholder: "Photo stage découverte",
   },
   {
     slug: "clown-et-objets",
@@ -184,27 +184,27 @@ export const workshops: Workshop[] = [
     maxParticipants: 12,
     audience: "Tous niveaux",
     description:
-      "Jongleureuse de formation, je vous propose a travers ce stage d'exprimer votre propre clown dans une connexion sensible a l'environnement. L'objet est ici vu comme catalyseur d'imaginaire et partenaire de jeu, a partir de ce qui emerge en soi.",
+      "Jongleureuse de formation, je vous propose à travers ce stage d'exprimer votre propre clown dans une connexion sensible à l'environnement. L'objet est ici vu comme catalyseur d'imaginaire et partenaire de jeu, à partir de ce qui émerge en soi.",
     imagePlaceholder: "Photo stage clown et objets",
   },
   {
     slug: "creation-personnage",
-    title: "Creation de personnage",
+    title: "Création de personnage",
     duration: "4 jours",
     maxParticipants: 12,
     audience: "Tous niveaux",
     description:
-      "Ce stage vous propose de rencontrer votre propre clown en tant que creature singuliere, en dehors des images stereotypees visant a rire de la marge. L'expectative du rire se situe ici a partir de ce qui est authentique, convoque a l'endroit d'une humanite partagee et declenche par resonnance.",
-    imagePlaceholder: "Photo stage creation de personnage",
+      "Ce stage vous propose de rencontrer votre propre clown en tant que créature singulière, en dehors des images stéréotypées visant à rire de la marge. L'expectative du rire se situe ici à partir de ce qui est authentique, convoqué à l'endroit d'une humanité partagée et déclenché par résonance.",
+    imagePlaceholder: "Photo stage création de personnage",
   },
   {
     slug: "stage-approfondi",
     title: "Stage clown approfondi",
     duration: "5 jours",
     maxParticipants: 12,
-    audience: "Niveau intermediaire",
+    audience: "Niveau intermédiaire",
     description:
-      "5 jours en immersion complete dans l'univers du clown : decouverte du monde de la scene et creation de personnage, exploration de son univers, sa palette d'emotions et sa relation a l'objet. Travail de la dramaturgie, ecriture et mise en place de son propre numero de clown, transmission d'outils pour devenir son propre metteurice en scene.",
+      "5 jours en immersion complète dans l'univers du clown : découverte du monde de la scène et création de personnage, exploration de son univers, sa palette d'émotions et sa relation à l'objet. Travail de la dramaturgie, écriture et mise en place de son propre numéro de clown, transmission d'outils pour devenir son propre metteurice en scène.",
     imagePlaceholder: "Photo stage approfondi",
   },
 ];
@@ -212,37 +212,37 @@ export const workshops: Workshop[] = [
 export const calendarEvents: CalendarEvent[] = [
   {
     id: "1",
-    title: "A cote",
+    title: "À côté",
     type: "spectacle",
     date: "2026-03-22",
     time: "20h30",
-    location: "Gueret",
-    venue: "Theatre municipal",
-    description: "Representation du duo clownesque",
+    location: "Guéret",
+    venue: "Théâtre municipal",
+    description: "Représentation du duo clownesque",
     audience: "Tout public",
   },
   {
     id: "2",
-    title: "A cote",
+    title: "À côté",
     type: "spectacle",
     date: "2026-04-15",
     time: "19h00",
     location: "Limoges",
     venue: "Salle communale",
-    description: "Representation du duo clownesque",
+    description: "Représentation du duo clownesque",
     audience: "Tout public",
     status: "dernieres-places",
   },
   {
     id: "3",
-    title: "Stage clown decouverte",
+    title: "Stage clown découverte",
     type: "stage",
     date: "2026-05-10",
     endDate: "2026-05-11",
     time: "10h-17h",
     location: "La Creuse",
     description:
-      "2 jours pour decouvrir le monde du clown et rencontrer sa propre palette de jeu.",
+      "2 jours pour découvrir le monde du clown et rencontrer sa propre palette de jeu.",
     audience: "Adultes, tous niveaux",
     price: "Tarif : nous contacter",
   },
@@ -254,8 +254,8 @@ export const calendarEvents: CalendarEvent[] = [
     time: "9h30-16h30",
     location: "La Creuse",
     description:
-      "Une journee pour jouer ensemble dans un cadre de cooperation et de complicite.",
-    audience: "Binomes adulte-enfant",
+      "Une journée pour jouer ensemble dans un cadre de coopération et de complicité.",
+    audience: "Binômes adulte-enfant",
     price: "Tarif : nous contacter",
   },
   {
@@ -265,9 +265,9 @@ export const calendarEvents: CalendarEvent[] = [
     date: "2026-07-06",
     endDate: "2026-07-09",
     time: "10h-17h",
-    location: "A confirmer",
+    location: "À confirmer",
     description:
-      "4 jours pour exprimer son propre clown dans une connexion sensible a l'environnement.",
+      "4 jours pour exprimer son propre clown dans une connexion sensible à l'environnement.",
     audience: "Adultes, tous niveaux",
     price: "Tarif : nous contacter",
   },
@@ -279,8 +279,8 @@ export const calendarEvents: CalendarEvent[] = [
     endDate: "2026-08-28",
     time: "10h-17h",
     location: "La Creuse",
-    description: "5 jours en immersion complete dans l'univers du clown.",
-    audience: "Niveau intermediaire",
+    description: "5 jours en immersion complète dans l'univers du clown.",
+    audience: "Niveau intermédiaire",
     price: "Tarif : nous contacter",
   },
 ];
@@ -288,33 +288,47 @@ export const calendarEvents: CalendarEvent[] = [
 export const companies: Company[] = [
   {
     name: "Les Poneys Rouges",
-    role: "Cofondatrice, clown, mise en scene",
+    role: "Cofondatrice, clown, mise en scène",
     period: "2012 - 2020",
   },
 ];
 
 export const biography = {
-  intro:
-    "Ziky Versari est clown-e et jongleureuse antipodiste. Son travail élabore des univers plaçant le corps au centre de l'action, débordant, matière de contact et de relation au monde.",
-  full: `Artiste et pedagogue dans les domaines du clown, du cirque, j'accorde beaucoup d'importance au processus de creation et au fait de reflechir a nos manieres de cooperer et de produire un spectacle a plusieurs.
+  intro:`Ziky Versari développe des univers artistiques plaçant le corps au centre de l’action : un corps malléable, hors norme et queer. À travers le clown et la matière, iel explore des comportements non normés afin d’interroger les tabous et d’inviter le public à dépasser certaines croyances limitantes, dans une démarche de légitimation des existences marginales.`,
+  intro2:
+    `Ziky Versari est clown-e et jongleureuse antipodiste. Son travail élabore des univers plaçant le corps au centre de l'action, débordant, matière de contact et de relation au monde.`,
+  full:`Ziky Versari est clown·e et jongleureuse antipodiste. Formé·e dans différentes écoles de cirque — du Théâtre Cirqule à Genève à l’École de Cirque de Bordeaux, en passant par Lomme et le Lido à Toulouse — iel développe une pratique à la croisée de la jonglerie et du clown.
 
-Ma recherche en tant que clown me permet d'experimenter des comportements hors-normes et de tenter de les rendre acceptables. Je peux ainsi amener le public, le temps d'une representation a depasser des croyances limitantes au sujet de certains tabous ce qui est pour moi une maniere de rendre legitimes des existences marginales.
+  Son travail place le corps au centre de l’action : un corps malléable, hors norme et queer, envisagé comme matière de transformation et de relation au monde. À travers la rencontre avec des objets et des matières du quotidien, iel explore les déformations et les prolongements du geste, ouvrant des espaces où l’étrange et l’impossible prennent forme.
 
-Jongleuse antipodiste, je me suis d'abord formee aupres de differentes ecoles de cirque comme le Theatre Cirqule a Geneve, l'Ecole de Cirque de Lille, celle de Bordeaux ainsi qu'au Lido a Toulouse.
+  Sa recherche en jonglerie se construit autour de la contrainte et des figures dites impossibles : iel y explore la manière dont le jonglage et l’antipodisme transforment à la fois le mouvement, les états du corps et les émotions. En parallèle, son travail de clown lui permet d’expérimenter des comportements hors normes, de jouer avec les tabous et de les rendre perceptibles, voire acceptables.
 
-Je me suis par la suite dediee a la pratique du clown au travers de differentes methodes.
+  Ses solos — Ballade de Rossure (2008), Mise en bouche (2014), Peau d’orange (2018) et Projet Baignoire (en cours de création) — témoignent de cette recherche autour du corps et de la matière.
 
-Toutes ces annees d'apprentissages et de recherches ont donne lieu a differents spectacles joues en salle comme dans la rue pour finalement donner naissance a la cie Les Poneys Rouges (2015-2020). Cofonde avec trois autres clowns, ce collectif a permis l'emergence de spectacles clownesques mais aussi de stages et de laboratoires.
+  En collectif, notamment avec la compagnie Les Poneys Rouges (2015–2020), iel a co-créé des spectacles en salle et dans l’espace public, ainsi que des stages et des laboratoires.
 
-Ces dernieres annees je me suis plus particulierement dediee a l'apprentissage d'outils d'intelligence collective.
+  Aujourd’hui installé·e en Creuse, Ziky Versari propose des spectacles, des ateliers et des stages autour du clown et du cirque, en intégrant des outils d’intelligence collective dans sa démarche artistique et pédagogique.
 
-Basee depuis peu dans la Creuse, je propose aujourd'hui des spectacles, des ateliers et des stages en lien avec la pratique du clown et le cirque.`,
+  Son travail invite à déplacer les regards, à interroger les normes et à ouvrir des espaces de légitimité pour des formes d’existence marginales.`,
+  full2: `Artiste et pedagogue dans les domaines du clown, du cirque, j'accorde beaucoup d'importance au processus de creation et au fait de reflechir a nos manieres de cooperer et de produire un spectacle a plusieurs.
+
+  Ma recherche en tant que clown me permet d'experimenter des comportements hors-normes et de tenter de les rendre acceptables. Je peux ainsi amener le public, le temps d'une representation a depasser des croyances limitantes au sujet de certains tabous ce qui est pour moi une maniere de rendre legitimes des existences marginales.
+
+  Jongleuse antipodiste, je me suis d'abord formee aupres de differentes ecoles de cirque comme le Theatre Cirqule a Geneve, l'Ecole de Cirque de Lille, celle de Bordeaux ainsi qu'au Lido a Toulouse.
+
+  Je me suis par la suite dediee a la pratique du clown au travers de differentes methodes.
+
+  Toutes ces annees d'apprentissages et de recherches ont donne lieu a differents spectacles joues en salle comme dans la rue pour finalement donner naissance a la cie Les Poneys Rouges (2015-2020). Cofonde avec trois autres clowns, ce collectif a permis l'emergence de spectacles clownesques mais aussi de stages et de laboratoires.
+
+  Ces dernieres annees je me suis plus particulierement dediee a l'apprentissage d'outils d'intelligence collective.
+
+  Basee depuis peu dans la Creuse, je propose aujourd'hui des spectacles, des ateliers et des stages en lien avec la pratique du clown et le cirque.`,
   disciplines: [
     "Clown",
     "Jonglage antipodiste",
-    "Ecriture",
-    "Mise en scene",
-    "Pedagogie",
+    "Écriture",
+    "Mise en scène",
+    "Pédagogie",
   ],
 };
 
@@ -322,25 +336,25 @@ export const biographyTimeline: BiographyMilestone[] = [
   {
     date: "2008",
     title: "Ballade de Rossure",
-    description: "Premier solo et premiere rencontre avec le public.",
+    description: "Premier solo et première rencontre avec le public.",
   },
   {
     date: "2012 - 2020",
     title: "Les Poneys Rouges",
     description:
-      "Cofondation du collectif, creation de spectacles, stages et laboratoires clownesques.",
+      "Cofondation du collectif, création de spectacles, stages et laboratoires clownesques.",
   },
   {
     date: "2014",
     title: "Mise en bouche",
     description:
-      "Creation d'un solo clownesque autour de la relation entre le corps et la nourriture.",
+      "Création d'un solo clownesque autour de la relation entre le corps et la nourriture.",
   },
   {
     date: "2018",
     title: "Peau d'orange",
     description:
-      "Creation d'un solo explorant les deformations et prolongements nes de la rencontre entre le corps et des objets du quotidien.",
+      "Création d'un solo explorant les déformations et prolongements nés de la rencontre entre le corps et des objets du quotidien.",
   },
   {
     date: "Aujourd'hui",
@@ -371,37 +385,37 @@ export const formations = [
 
 export const faqItems = [
   {
-    question: "Faut-il avoir de l'experience pour participer ?",
+    question: "Faut-il avoir de l'expérience pour participer ?",
     answer:
-      "Non, la plupart des ateliers et stages sont ouverts a tous les niveaux. Seul le stage approfondi requiert un niveau intermediaire. L'approche est toujours bienveillante et progressive.",
+      "Non, la plupart des ateliers et stages sont ouverts à tous les niveaux. Seul le stage approfondi requiert un niveau intermédiaire. L'approche est toujours bienveillante et progressive.",
   },
   {
-    question: "Faut-il reserver ?",
+    question: "Faut-il réserver ?",
     answer:
-      "Oui, les places sont limitees. Contactez-moi par email pour reserver votre place.",
+      "Oui, les places sont limitées. Contactez-moi par email pour réserver votre place.",
   },
   {
-    question: "Quel materiel apporter ?",
+    question: "Quel matériel apporter ?",
     answer:
-      "Venez avec des vetements confortables dans lesquels vous pouvez bouger. Pour les stages incluant costume ou maquillage, une liste complementaire peut etre transmise en amont.",
+      "Venez avec des vêtements confortables dans lesquels vous pouvez bouger. Pour les stages incluant costume ou maquillage, une liste complémentaire peut être transmise en amont.",
   },
   {
     question: "Quel est le tarif des stages ?",
     answer:
-      "Les tarifs varient selon la duree et le format de l'atelier. Contactez-moi pour obtenir les informations detaillees.",
+      "Les tarifs varient selon la durée et le format de l'atelier. Contactez-moi pour obtenir les informations détaillées.",
   },
   {
-    question: "Ou se deroulent les stages ?",
+    question: "Où se déroulent les stages ?",
     answer:
       "Les stages ont lieu dans la Creuse ou dans d'autres lieux en France selon les demandes et partenariats.",
   },
 ];
 
 export const galleryImages: GalleryImage[] = [
-  { id: "1", src: "", alt: "Ziky en scene - Peau d'orange", category: "spectacle", showSlug: "peau-d-orange" },
+  { id: "1", src: "", alt: "Ziky en scène - Peau d'orange", category: "spectacle", showSlug: "peau-d-orange" },
   { id: "2", src: "", alt: "Atelier clown adultes-enfants", category: "atelier" },
   { id: "3", src: "", alt: "Portrait de Ziky Versari", category: "portrait" },
-  { id: "4", src: "", alt: "Les Poneys Rouges en repetition", category: "coulisses", showSlug: "les-poneys-rouges" },
+  { id: "4", src: "", alt: "Les Poneys Rouges en répétition", category: "coulisses", showSlug: "les-poneys-rouges" },
   { id: "5", src: "", alt: "Ziky - Mise en bouche", category: "spectacle", showSlug: "mise-en-bouche" },
-  { id: "6", src: "", alt: "Stage clown decouverte", category: "atelier" },
+  { id: "6", src: "", alt: "Stage clown découverte", category: "atelier" },
 ];

@@ -10,23 +10,25 @@ const statusOrder: Record<string, number> = {
   archive: 2,
 };
 
-const sortedShows = [...shows].sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
+const sortedShows = [...shows].sort(
+  (a, b) => statusOrder[a.status] - statusOrder[b.status],
+);
 ---
 
 <BaseLayout
   title="Spectacles | Ziky Versari"
-  description="Historique des creations de Ziky Versari : solos, duos et spectacles collectifs."
+  description="Historique des créations de Ziky Versari : solos, duos et spectacles collectifs."
 >
   <div class="mx-auto max-w-6xl px-6 py-16">
     <SectionHeading
-      label="Creations"
+      label="Créations"
       title="Spectacles"
-      description="Solos, duos et creations collectives. Un parcours ou le corps debordant est matiere de contact et de relation au monde."
+      description="Solos, duos et créations collectives. Un parcours où le corps débordant est matière de contact et de relation au monde."
     />
 
     <SpectaclesArchive shows={sortedShows} />
 
-    {companies.length > 0 && (
+    <!-- {companies.length > 0 && (
       <section class="mt-24 border-t border-border pt-16">
         <SectionHeading label="Collaborations" title="Compagnies" />
         <div class="mt-8 flex flex-col gap-6">
@@ -54,6 +56,6 @@ const sortedShows = [...shows].sort((a, b) => statusOrder[a.status] - statusOrde
           ))}
         </div>
       </section>
-    )}
+    )} -->
   </div>
 </BaseLayout>
