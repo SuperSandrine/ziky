@@ -4,12 +4,12 @@ import type { GalleryImage } from "./site";
 import aCotePrimary from "../assets/images/spectacles/principal de Acote.webp";
 import baignoirePrimary from "../assets/images/spectacles/projet baignoire principal.webp";
 import laLutteFinalePrimary from "../assets/images/spectacles/principal la lutte final.webp";
-import aCoteMiniatureOne from "../assets/images/spectacles/miniature acote.JPG";
-import aCoteMiniatureTwo from "../assets/images/spectacles/miniature acote (2).JPG";
-import aCoteMiniatureThree from "../assets/images/spectacles/miniature acote 3.JPG";
-import laLutteFinaleMiniatureOne from "../assets/images/spectacles/miniature la lutte final.jpg";
-import laLutteFinaleMiniatureTwo from "../assets/images/spectacles/miniature la lutte final (2).jpg";
-import laLutteFinaleMiniatureThree from "../assets/images/spectacles/miniature la lutte final (3).jpg";
+import aCoteMiniatureOne from "../assets/images/spectacles/miniature acote.webp";
+import aCoteMiniatureTwo from "../assets/images/spectacles/miniature acote (2).webp";
+import aCoteMiniatureThree from "../assets/images/spectacles/miniature acote 3.webp";
+import laLutteFinaleMiniatureOne from "../assets/images/spectacles/miniature la lutte final.webp";
+import laLutteFinaleMiniatureTwo from "../assets/images/spectacles/miniature la lutte final (2).webp";
+import laLutteFinaleMiniatureThree from "../assets/images/spectacles/miniature la lutte final (3).webp";
 
 export interface ShowMediaImage {
   src: string;
