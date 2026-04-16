@@ -13,6 +13,23 @@ interface Props {
 }
 
 const { images, categories } = Astro.props;
+const visibleImages = images.filter((image) => image.src);
+
+const pastCreationSlugs = new Set([
+  "peau-d-orange",
+  "mise-en-bouche",
+  "ballade-de-rossure",
+  "les-poneys-rouges",
+]);
+
+const filterCategoryFor = (image: GalleryImage) => {
+  if (image.category === "portrait") return "portrait";
+  if (image.category === "atelier") return "atelier";
+  if (image.category === "coulisses") return "past-creations";
+  if (image.showSlug && pastCreationSlugs.has(image.showSlug))
+    return "past-creations";
+  return "spectacle";
+};
 
 const aspectFor = (category: GalleryImage["category"]) => {
   if (category === "portrait") return "portrait";
@@ -23,41 +40,49 @@ const aspectFor = (category: GalleryImage["category"]) => {
 
 <div data-gallery-grid>
   <div class="mt-8 flex flex-wrap gap-2">
-    {categories.map((category, index) => (
-      <button
-        type="button"
-        class:list={[
-          "px-4 py-2 text-sm transition-colors",
-          index === 0
-            ? "bg-foreground text-background"
-            : "border border-border text-muted-foreground hover:text-foreground",
-        ]}
-        data-gallery-filter={category.key}
-      >
-        {category.label}
-      </button>
-    ))}
+    {
+      categories.map((category, index) => (
+        <button
+          type="button"
+          class:list={[
+            "px-4 py-2 text-sm transition-colors",
+            index === 0
+              ? "bg-foreground text-background"
+              : "border border-border text-muted-foreground hover:text-foreground",
+          ]}
+          data-gallery-filter={category.key}
+        >
+          {category.label}
+        </button>
+      ))
+    }
   </div>
 
-  <div class="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3" data-gallery-list>
-    {images.map((image) => (
-      <button
-        type="button"
-        class="mb-4 block w-full overflow-hidden rounded-sm transition-transform hover:scale-[1.01]"
-        data-gallery-item
-        data-category={image.category}
-        data-alt={image.alt}
-        data-src={image.src}
-        data-aspect={aspectFor(image.category)}
-        aria-label={`Voir ${image.alt} en grand`}
-      >
-        {image.src ? (
-          <img src={image.src} alt={image.alt} class="h-auto w-full" loading="lazy" />
-        ) : (
-          <ImagePlaceholder alt={image.alt} aspect={aspectFor(image.category)} />
-        )}
-      </button>
-    ))}
+  <div
+    class="mt-10 columns-1 gap-4 sm:columns-2 lg:columns-3"
+    data-gallery-list
+  >
+    {
+      visibleImages.map((image) => (
+        <button
+          type="button"
+          class="mb-4 block w-full overflow-hidden rounded-sm transition-transform hover:scale-[1.01]"
+          data-gallery-item
+          data-category={filterCategoryFor(image)}
+          data-alt={image.alt}
+          data-src={image.src}
+          data-aspect={aspectFor(image.category)}
+          aria-label={`Voir ${image.alt} en grand`}
+        >
+          <img
+            src={image.src}
+            alt={image.alt}
+            class="h-auto w-full"
+            loading="lazy"
+          />
+        </button>
+      ))
+    }
   </div>
 
   <p class="hidden py-16 text-center text-muted-foreground" data-gallery-empty>
@@ -80,11 +105,23 @@ const aspectFor = (category: GalleryImage["category"]) => {
       ×
     </button>
     <div class="max-h-[85vh] max-w-4xl">
-      <img class="hidden max-h-[85vh] w-auto rounded-sm" data-gallery-lightbox-image alt="" />
+      <img
+        class="hidden max-h-[85vh] w-auto rounded-sm"
+        data-gallery-lightbox-image
+        alt=""
+      />
       <div class="hidden text-background" data-gallery-lightbox-placeholder>
-        <ImagePlaceholder alt="Image de la galerie" aspect="video" class="w-[600px] max-w-full" />
+        <ImagePlaceholder
+          alt="Image de la galerie"
+          aspect="video"
+          class="w-[600px] max-w-full"
+        />
       </div>
-      <p class="mt-4 text-center text-sm text-background/70" data-gallery-caption></p>
+      <p
+        class="mt-4 text-center text-sm text-background/70"
+        data-gallery-caption
+      >
+      </p>
     </div>
   </div>
 </div>
@@ -97,9 +134,13 @@ const aspectFor = (category: GalleryImage["category"]) => {
     const empty = root.querySelector("[data-gallery-empty]");
     const lightbox = root.querySelector("[data-gallery-lightbox]");
     const lightboxImage = root.querySelector("[data-gallery-lightbox-image]");
-    const lightboxPlaceholder = root.querySelector("[data-gallery-lightbox-placeholder]");
+    const lightboxPlaceholder = root.querySelector(
+      "[data-gallery-lightbox-placeholder]",
+    );
     const caption = root.querySelector("[data-gallery-caption]");
     const close = root.querySelector("[data-gallery-close]");
+
+    const defaultFilter = buttons[0]?.dataset.galleryFilter || "all";
 
     const setFilter = (value) => {
       let visible = 0;
@@ -134,7 +175,12 @@ const aspectFor = (category: GalleryImage["category"]) => {
       item.addEventListener("click", () => {
         const src = item.dataset.src || "";
         const alt = item.dataset.alt || "";
-        if (!lightbox || !caption || !(lightboxImage instanceof HTMLImageElement)) return;
+        if (
+          !lightbox ||
+          !caption ||
+          !(lightboxImage instanceof HTMLImageElement)
+        )
+          return;
 
         caption.textContent = alt;
         if (src) {
@@ -155,7 +201,9 @@ const aspectFor = (category: GalleryImage["category"]) => {
     });
 
     buttons.forEach((button) => {
-      button.addEventListener("click", () => setFilter(button.dataset.galleryFilter || "all"));
+      button.addEventListener("click", () =>
+        setFilter(button.dataset.galleryFilter || "all"),
+      );
     });
     close?.addEventListener("click", closeLightbox);
     lightbox?.addEventListener("click", (event) => {
@@ -164,5 +212,7 @@ const aspectFor = (category: GalleryImage["category"]) => {
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") closeLightbox();
     });
+
+    setFilter(defaultFilter);
   }
 </script>

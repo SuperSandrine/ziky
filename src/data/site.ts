@@ -326,8 +326,9 @@ export const biography = {
   disciplines: [
     "Clown",
     "Jonglage antipodiste",
-    "Écriture",
-    "Mise en scène",
+    "Fouet artistique",
+    "Lancer de couteau",
+    "Regard extérieur",
     "Pédagogie",
   ],
 };
