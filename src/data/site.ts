@@ -72,23 +72,12 @@ export const navigation = [
 
 export const shows: Show[] = [
   {
-    slug: "baignoire",
-    title: "Baignoire",
-    year: "2026",
-    status: "en-creation",
-    type: "solo",
-    roles: ["Clown", "Écriture", "Interprétation"],
-    shortDescription:
-      "Un solo en cours de création explorant la rencontre entre le corps et les objets du quotidien.",
-    imagePlaceholder: "Photo de Baignoire",
-  },
-  {
     slug: "a-cote",
     title: "À côté",
     year: "2025",
     status: "en-tournee",
     type: "duo",
-    roles: ["Clown", "Interprétation"],
+    roles: ["Clown", "Jonglerie antipodiste", "Manipulation d'objets"],
     shortDescription:
       "Elvira, tranquille dans sa petite maison, voit sa vie chamboulée quand Padock débarque juste à côté : entre leurs caractères opposés, la cohabitation promet d'être explosive !",
     externalLink: "https://acoteclown.wixsite.com/acote",
@@ -97,13 +86,24 @@ export const shows: Show[] = [
   {
     slug: "la-lutte-finale",
     title: "La Lutte Finale",
-    year: "2026",
+    year: "2027",
     status: "en-creation",
     type: "collectif",
-    roles: ["Clown", "Écriture"],
+    roles: ["Clown", "Catch", "Fouet/couteaux"],
     shortDescription: "Dans ce grand show de catch, Musclor, challenger issu du public, va essayer de remporter le combat contre Champion, chouchou évident de la présentatrice Violentine.",
     longDescription: "Dans ce grand show de catch, Musclor, challenger issu du public, va essayer de remporter le combat contre Champion, chouchou évident de la présentatrice Violentine. Champion est tenant du titre depuis 1998 (vainqueur notamment du célèbre combat à main nues contre deux chiens et trois ours) mais Musclor n'a pas peur car il est vraiment très musclé. De plus, il est mu par de nobles sentiments auquel le public sera très certainement sensible. </br>Attention ce spectacle comporte : des prises de catch, des coups bas, des faux semblants, du favoritisme, de la méchanceté, de la passion, des paillettes, de la soif de violence, de la lutte de classe et peut-être des renversements de pouvoir..",
     imagePlaceholder: "Photo de La Lutte Finale",
+  },
+    {
+    slug: "baignoire",
+    title: "Baignoire",
+    year: "2027",
+    status: "en-creation",
+    type: "solo",
+    roles: ["Clown", "Jonglerie antipodiste", "Marionette"],
+    shortDescription:
+      "Un solo en cours de création explorant la rencontre entre le corps et les objets du quotidien.",
+    imagePlaceholder: "Photo de Baignoire",
   },
   // {
   //   slug: "peau-d-orange",
@@ -306,7 +306,7 @@ export const biography = {
     "Clown",
     "Jonglage antipodiste",
     "Fouet artistique",
-    "Lancer de couteau",
+    "Lancer de couteaux",
     "Regard extérieur",
     "Pédagogie",
   ],
@@ -372,7 +372,7 @@ export const faqItems = [
   {
     question: "Faut-il réserver ?",
     answer:
-      "Oui, les places sont limitées. Contactez-moi par email pour réserver votre place.",
+      "Oui, les places sont limitées. Contactez-moi par email ou par téléphone pour réserver votre place.",
   },
   {
     question: "Quel matériel apporter ?",
@@ -384,11 +384,11 @@ export const faqItems = [
     answer:
       "Les tarifs varient selon la durée et le format de l’atelier. N’hésitez pas à me contacter pour obtenir des informations détaillées. Le tarif ne doit pas être un frein: des tarifs solidaires sont possibles.",
   },
-  {
-    question: "Où se déroulent les stages ?",
-    answer:
-      "Les stages ont lieu dans la Creuse ou dans d'autres lieux en France selon les demandes et partenariats.",
-  },
+  // {
+  //   question: "Où se déroulent les stages ?",
+  //   answer:
+  //     "Les stages ont lieu dans la Creuse ou dans d'autres lieux en France selon les demandes et partenariats.",
+  // },
 ];
 
 export const galleryImages: GalleryImage[] = [

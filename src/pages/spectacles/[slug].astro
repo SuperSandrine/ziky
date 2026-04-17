@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { calendarEvents, contactEmail, shows } from "../../data/site";
+import { calendarEvents, shows } from "../../data/site";
 import { showMedia } from "../../data/show-media";
 import Icon from "../../components/Icon.astro";
 import ImagePlaceholder from "../../components/ImagePlaceholder.astro";
@@ -183,14 +183,6 @@ const longDescriptionParagraphs = show.longDescription
             </div>
           </div>
         </div>
-
-        <a
-          href={`mailto:${contactEmail}?subject=Programmation : ${show.title}`}
-          class="flex items-center justify-center gap-2 bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-all hover:scale-[1.02]"
-        >
-          <Icon name="mail" class="h-4 w-4" />
-          Programmer ce spectacle
-        </a>
 
         {show.externalLink && (
           <a
