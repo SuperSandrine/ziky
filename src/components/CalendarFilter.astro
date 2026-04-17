@@ -1,6 +1,6 @@
 ---
 import type { CalendarEvent } from "../data/site";
-import { contactEmail } from "../data/site";
+import { shows } from "../data/site";
 import Icon from "./Icon.astro";
 
 interface Props {
@@ -11,9 +11,8 @@ const { events } = Astro.props;
 
 const typeFilters = [
   { key: "all", label: "Tous les types" },
-  { key: "spectacle", label: "Spectacle" },
-  { key: "stage", label: "Stage" },
-  { key: "atelier", label: "Atelier" },
+  { key: "spectacle", label: "Spectacles" },
+  { key: "practice", label: "Stage et atelier" },
 ] as const;
 
 const typeLabel: Record<string, string> = {
@@ -60,6 +59,31 @@ function formatDayParts(dateStr: string) {
     year: date.getFullYear().toString(),
   };
 }
+
+function normalizeForMatch(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function getEventLink(event: CalendarEvent) {
+  if (event.link) return event.link;
+  if (event.type !== "spectacle") return null;
+
+  const normalizedTitle = normalizeForMatch(event.title);
+  const matchingShow = shows.find((show) => {
+    const normalizedShowTitle = normalizeForMatch(show.title);
+    return (
+      normalizedTitle.includes(normalizedShowTitle) ||
+      normalizedShowTitle.includes(normalizedTitle)
+    );
+  });
+
+  return matchingShow ? `/spectacles/${matchingShow.slug}` : null;
+}
 ---
 
 <div data-calendar-filter>
@@ -102,6 +126,7 @@ function formatDayParts(dateStr: string) {
       {futureEvents.map((event) => {
         const d = formatDayParts(event.date);
         const badge = event.status ? statusBadge[event.status] : null;
+        const eventLink = getEventLink(event);
         return (
           <article
             class="group border-b border-border py-8 first:pt-0"
@@ -158,12 +183,14 @@ function formatDayParts(dateStr: string) {
                     {event.venue && <span class="text-xs opacity-70">{event.venue}</span>}
                   </div>
                 </div>
-                <a
-                  href={`mailto:${contactEmail}?subject=${encodeURIComponent(`${event.title} - ${formatDate(event.date)}`)}`}
-                  class="flex items-center gap-1 text-xs text-foreground underline underline-offset-4 transition-colors hover:text-accent"
-                >
-                  <Icon name="mail" class="h-3 w-3" /> Réserver
-                </a>
+                {eventLink && (
+                  <a
+                    href={eventLink}
+                    class="flex items-center gap-1 text-xs text-foreground underline underline-offset-4 transition-colors hover:text-accent"
+                  >
+                    En savoir plus <Icon name="arrow-right" class="h-3 w-3" />
+                  </a>
+                )}
               </div>
             </div>
           </article>
@@ -189,6 +216,9 @@ function formatDayParts(dateStr: string) {
           </div>
         ))}
       </div>
+      <p class="mt-6 text-sm text-muted-foreground">
+        Spectacle passé ? Contactez Ziky.
+      </p>
     </section>
   )}
 </div>
@@ -215,7 +245,11 @@ function formatDayParts(dateStr: string) {
       });
 
       events.forEach((event) => {
-        const show = value === "all" || event.dataset.type === value;
+        const eventType = event.dataset.type;
+        const show =
+          value === "all" ||
+          eventType === value ||
+          (value === "practice" && (eventType === "stage" || eventType === "atelier"));
         event.classList.toggle("hidden", !show);
         if (show) visible += 1;
       });

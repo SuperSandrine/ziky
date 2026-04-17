@@ -34,6 +34,10 @@ const upcomingDates = calendarEvents.filter(
     new Date(event.date) >= new Date(),
 );
 const media = showMedia[show.slug];
+const longDescriptionParagraphs = show.longDescription
+  ?.split(/<\/br>|<br\s*\/?>|\n\n/g)
+  .map((paragraph) => paragraph.trim())
+  .filter(Boolean);
 ---
 
 <BaseLayout title={`${show.title} | Ziky Versari`} description={show.shortDescription}>
@@ -76,13 +80,21 @@ const media = showMedia[show.slug];
           <h2 class="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
             À propos du spectacle
           </h2>
-          <p class="text-lg leading-relaxed text-foreground">{show.shortDescription}</p>
-          {show.longDescription && (
-            <div class="mt-4 flex flex-col gap-4">
-              {show.longDescription.split("\n\n").map((paragraph) => (
-                <p class="leading-relaxed text-muted-foreground">{paragraph}</p>
+          {longDescriptionParagraphs?.length ? (
+            <div class="flex flex-col gap-5">
+              {longDescriptionParagraphs.map((paragraph, index) => (
+                <p
+                  class:list={[
+                    "leading-relaxed",
+                    index === 0 ? "text-lg text-foreground" : "text-muted-foreground",
+                  ]}
+                >
+                  {paragraph}
+                </p>
               ))}
             </div>
+          ) : (
+            <p class="text-lg leading-relaxed text-foreground">{show.shortDescription}</p>
           )}
         </div>
 
