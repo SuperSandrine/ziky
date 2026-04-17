@@ -12,6 +12,7 @@ import laLutteFinaleMiniatureTwo from "../assets/images/spectacles/miniature la 
 import laLutteFinaleMiniatureThree from "../assets/images/spectacles/miniature la lutte final (3).webp";
 
 export interface ShowMediaImage {
+  asset: ImageMetadata;
   src: string;
   alt: string;
   width: number;
@@ -24,6 +25,7 @@ export interface ShowMediaEntry {
 }
 
 const toShowMediaImage = (asset: ImageMetadata, alt: string): ShowMediaImage => ({
+  asset,
   src: asset.src,
   alt,
   width: asset.width,
@@ -57,6 +59,7 @@ export const showGalleryImages: GalleryImage[] = Object.entries(showMedia).flatM
   ([showSlug, media], showIndex) =>
     media.gallery.map((image, imageIndex) => ({
       id: `show-${showIndex + 1}-${imageIndex + 1}`,
+      asset: image.asset,
       src: image.src,
       alt: image.alt,
       category: "spectacle",

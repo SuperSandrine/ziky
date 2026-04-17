@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { calendarEvents, shows } from "../../data/site";
 import { showMedia } from "../../data/show-media";
@@ -43,11 +44,15 @@ const longDescriptionParagraphs = show.longDescription
 <BaseLayout title={`${show.title} | Ziky Versari`} description={show.shortDescription}>
   <div class="relative">
     {media?.cover ? (
-      <img
-        src={media.cover.src}
+      <Image
+        src={media.cover.asset}
         alt={media.cover.alt}
         class="aspect-video w-full object-cover"
+        widths={[720, 1200, 1600]}
+        sizes="100vw"
+        format="webp"
         loading="eager"
+        priority
       />
     ) : (
       <ImagePlaceholder alt={show.imagePlaceholder} aspect="wide" class="w-full" />
@@ -106,13 +111,16 @@ const longDescriptionParagraphs = show.longDescription
             <div class="flex gap-4">
               {media.gallery.map((image) => (
                 <figure class="overflow-hidden rounded-sm bg-muted">
-                  <img
-                    src={image.src}
+                  <Image
+                    src={image.asset}
                     alt={image.alt}
                     class:list={[
                       "w-full object-cover",
                       image.height > image.width ? "aspect-3/4" : "aspect-4/3",
                     ]}
+                    widths={[320, 480, 640]}
+                    sizes="(max-width: 768px) 33vw, 240px"
+                    format="webp"
                     loading="lazy"
                   />
                 </figure>

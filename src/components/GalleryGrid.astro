@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { GalleryImage } from "../data/site";
 import ImagePlaceholder from "./ImagePlaceholder.astro";
 
@@ -63,25 +64,43 @@ const aspectFor = (category: GalleryImage["category"]) => {
     data-gallery-list
   >
     {
-      visibleImages.map((image) => (
-        <button
-          type="button"
-          class="mb-4 block w-full overflow-hidden rounded-sm transition-transform hover:scale-[1.01]"
-          data-gallery-item
-          data-category={filterCategoryFor(image)}
-          data-alt={image.alt}
-          data-src={image.src}
-          data-aspect={aspectFor(image.category)}
-          aria-label={`Voir ${image.alt} en grand`}
-        >
-          <img
-            src={image.src}
-            alt={image.alt}
-            class="h-auto w-full"
-            loading="lazy"
-          />
-        </button>
-      ))
+      visibleImages.map((image, index) => {
+        const isAboveTheFold = index === 0;
+
+        return (
+          <button
+            type="button"
+            class="mb-4 block w-full overflow-hidden rounded-sm transition-transform hover:scale-[1.01]"
+            data-gallery-item
+            data-category={filterCategoryFor(image)}
+            data-alt={image.alt}
+            data-src={image.src}
+            data-aspect={aspectFor(image.category)}
+            aria-label={`Voir ${image.alt} en grand`}
+          >
+            {image.asset ? (
+              <Image
+                src={image.asset}
+                alt={image.alt}
+                class="h-auto w-full"
+                widths={[360, 540, 720]}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                format="webp"
+                loading={isAboveTheFold ? "eager" : "lazy"}
+                fetchpriority={isAboveTheFold ? "high" : "auto"}
+              />
+            ) : (
+              <img
+                src={image.src}
+                alt={image.alt}
+                class="h-auto w-full"
+                loading={isAboveTheFold ? "eager" : "lazy"}
+                fetchpriority={isAboveTheFold ? "high" : "auto"}
+              />
+            )}
+          </button>
+        );
+      })
     }
   </div>
 
@@ -109,6 +128,8 @@ const aspectFor = (category: GalleryImage["category"]) => {
         class="hidden max-h-[85vh] w-auto rounded-sm"
         data-gallery-lightbox-image
         alt=""
+        loading="lazy"
+        decoding="async"
       />
       <div class="hidden text-background" data-gallery-lightbox-placeholder>
         <ImagePlaceholder

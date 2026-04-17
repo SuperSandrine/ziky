@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { biography } from "../data/site";
 import Icon from "./Icon.astro";
 import heroBackground from "../assets/images/portrait/photo d'acueil.webp";
@@ -6,12 +7,14 @@ import heroBackground from "../assets/images/portrait/photo d'acueil.webp";
 
 <section class="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden px-6 py-24 text-center">
   <div class="absolute inset-0 bg-muted" aria-hidden="true">
-    <img
-      src={heroBackground.src}
+    <Image
+      src={heroBackground}
       alt=""
       class="h-full w-full object-cover"
+      widths={[720, 1200, 1600]}
+      sizes="100vw"
+      format="webp"
       loading="eager"
-      decoding="async"
     />
     <div class="absolute inset-0 bg-background/45"></div>
     <div class="absolute inset-0 bg-linear-to-b from-background/75 via-background/45 to-background"></div>

@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {
   biography,
@@ -16,13 +17,13 @@ import homePortrait from "../assets/images/portrait/photo d'acueil.webp";
 
 const paragraphs = biography.full.split("\n\n");
 const biographyGallery = [
-  { src: biographyImageOne.src, alt: "Ziky Versari en biographie 1" },
-  { src: biographyImageTwo.src, alt: "Ziky Versari en biographie 2" },
-  { src: biographyImageThree.src, alt: "Ziky Versari en biographie 3" },
-  { src: biographyPortrait.src, alt: "Portrait de Ziky Versari" },
+  { asset: biographyImageOne, alt: "Ziky Versari en biographie 1" },
+  { asset: biographyImageTwo, alt: "Ziky Versari en biographie 2" },
+  { asset: biographyImageThree, alt: "Ziky Versari en biographie 3" },
+  { asset: biographyPortrait, alt: "Portrait de Ziky Versari" },
   {
-    src: homePortrait.src,
-    alt: "Photo d'accueil de Ziky Versari",
+    asset: homePortrait,
+    alt: "Portrait d'accueil de Ziky Versari",
     imageClassName: "object-[10%_22%]",
   },
 ];
@@ -46,11 +47,15 @@ const disciplineIcons: Record<string, string> = {
 
     <div class="mt-16 grid gap-12 md:grid-cols-[2fr_3fr]">
       <div class="flex flex-col gap-4">
-        <img
-          src={biographyPortrait.src}
+        <Image
+          src={biographyPortrait}
           alt="Portrait de Ziky Versari"
           class="aspect-3/4 w-full rounded-sm object-cover shadow-lg"
-          loading="lazy"
+          widths={[480, 720, 960]}
+          sizes="(max-width: 768px) 100vw, 40vw"
+          format="webp"
+          loading="eager"
+          priority
         />
         <p class="text-center text-xs text-muted-foreground">
           Ziky Versari - Photo : crédit à venir
@@ -100,13 +105,16 @@ const disciplineIcons: Record<string, string> = {
         {
           biographyGallery.map((image) => (
             <figure class="overflow-hidden rounded-sm bg-muted">
-              <img
-                src={image.src}
+              <Image
+                src={image.asset}
                 alt={image.alt}
                 class:list={[
                   "h-72 w-full object-cover transition-transform duration-500 hover:scale-[1.03]",
                   image.imageClassName,
                 ]}
+                widths={[240, 360, 480]}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
+                format="webp"
                 loading="lazy"
               />
             </figure>

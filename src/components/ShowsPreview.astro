@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { shows } from "../data/site";
 import { showMedia } from "../data/show-media";
 import Icon from "./Icon.astro";
@@ -32,10 +33,13 @@ const featured = shows
         >
           <div class="relative aspect-[4/3] overflow-hidden">
             {media?.cover ? (
-              <img
-                src={media.cover.src}
+              <Image
+                src={media.cover.asset}
                 alt={media.cover.alt}
                 class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                widths={[400, 640, 800]}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                format="webp"
                 loading="lazy"
               />
             ) : (

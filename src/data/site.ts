@@ -1,3 +1,5 @@
+import type { ImageMetadata } from "astro";
+
 export interface Show {
   slug: string;
   title: string;
@@ -47,6 +49,7 @@ export interface Company {
 
 export interface GalleryImage {
   id: string;
+  asset?: ImageMetadata;
   src: string;
   alt: string;
   category: "spectacle" | "atelier" | "portrait" | "coulisses";

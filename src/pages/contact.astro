@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { contactEmail } from "../data/site";
 import Icon from "../components/Icon.astro";
@@ -14,32 +15,48 @@ import contactPhoto from "../assets/images/portrait/photo contact.webp";
     <div class="overflow-hidden border border-border bg-card">
       <div class="flex flex-col lg:min-h-[720px] lg:flex-row">
         <div class="relative lg:w-[46%]">
-          <img
-            src={contactPhoto.src}
-            alt="Photo de contact de Ziky Versari"
+          <Image
+            src={contactPhoto}
+            alt="Portrai de Ziky Versari en pied"
             class="h-full min-h-[320px] w-full object-cover"
             loading="eager"
+            priority
+            sizes="(max-width: 1024px) 100vw, 46vw"
+            format="webp"
           />
-          <div class="absolute inset-0 bg-linear-to-t from-foreground/30 via-transparent to-transparent"></div>
+          <div
+            class="absolute inset-0 bg-linear-to-t from-foreground/30 via-transparent to-transparent"
+          >
+          </div>
         </div>
 
-        <div class="flex flex-1 flex-col justify-center px-8 py-10 sm:px-10 lg:px-12 lg:py-14">
+        <div
+          class="flex flex-1 flex-col justify-center px-8 py-10 sm:px-10 lg:px-12 lg:py-14"
+        >
           <SectionHeading
             title="Contact"
             description="Pour une programmation, un stage, une collaboration ou simplement échanger."
           />
 
-          <div class="mt-12 flex flex-col gap-8" data-contact-copy-root data-email={contactEmail}>
+          <div
+            class="mt-12 flex flex-col gap-8"
+            data-contact-copy-root
+            data-email={contactEmail}
+          >
             <button
               type="button"
               class="group flex w-fit items-center gap-4 text-left"
               data-copy-email
               aria-label="Copier l'adresse mail"
             >
-              <span class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-110">
+              <span
+                class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-110"
+              >
                 <Icon name="mail" class="h-6 w-6" />
               </span>
-              <span class="text-lg text-foreground underline underline-offset-4 transition-colors group-hover:text-accent">
+              <span
+                class="text-lg text-foreground underline underline-offset-4 transition-colors group-hover:text-accent"
+              >
                 {contactEmail}
               </span>
             </button>
