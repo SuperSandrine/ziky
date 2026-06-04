@@ -33,6 +33,7 @@
 ## 🎯 À faire maintenant
 
 ### 1. **Générer l'image OG** (IMPORTANT)
+- ✅
 ```
 1. Créer une image 1200x630px
 2. Sauvegarder en `/public/og-image.png`
@@ -40,6 +41,7 @@
 ```
 
 ### 2. **Vérifier l'URL du site**
+- ✅
 - Remplacer `https://zikyversari.fr` par votre vrai domaine dans:
   - `astro.config.mjs` (ligne 4)
   - `public/robots.txt` (ligne 4)
@@ -75,9 +77,9 @@ sameAs: [
 ### 5. **Tester le SEO**
 
 Outils gratuits:
-- Google Search Console: https://search.google.com/search-console/
-- Google PageSpeed Insights: https://pagespeed.web.dev/
-- Schema.org Validator: https://validator.schema.org/
+- ✅ Google Search Console: https://search.google.com/search-console/
+- ✅ Google PageSpeed Insights: https://pagespeed.web.dev/
+- ✅ Schema.org Validator: https://validator.schema.org/
 - Facebook Sharing Debugger: https://developers.facebook.com/tools/debug/
 
 ### 6. **Soumettre le sitemap**
