@@ -1,0 +1,41 @@
+---
+interface Props {
+  type: "Person" | "LocalBusiness" | "Event";
+  data?: Record<string, any>;
+}
+
+const { type, data = {} } = Astro.props;
+
+let structuredData: Record<string, any> = {
+  "@context": "https://schema.org",
+  "@type": type,
+};
+
+if (type === "Person") {
+  structuredData = {
+    ...structuredData,
+    name: "Ziky Versari",
+    url: "https://zikyversari.fr",
+    jobTitle: "Clown, Jongleureuse Antipodiste, Pédagogue",
+    description:
+      "Ziky Versari est clown-e et jongleureuse antipodiste. Spectacles, ateliers et stages de clown.",
+    image: "https://zikyversari.fr/og-image.png",
+    sameAs: [
+      // Ajouter les réseaux sociaux quand disponibles
+    ],
+    ...data,
+  };
+} else if (type === "LocalBusiness") {
+  structuredData = {
+    ...structuredData,
+    name: "Ziky Versari",
+    description:
+      "Spectacles vivants, cirque et ateliers pédagogiques de clown",
+    url: "https://zikyversari.fr",
+    priceRange: "€€",
+    ...data,
+  };
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

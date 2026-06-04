@@ -1,16 +1,22 @@
 ---
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import SEO from "../components/SEO.astro";
+import StructuredData from "../components/StructuredData.astro";
 import "../styles/global.css";
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  ogType?: "website" | "article" | "profile";
 }
 
 const {
-  title = "Ziky Versari - Clown, Cirque, Pedagogie",
+  title = "Ziky Versari - Clown, Cirque, Pédagogie",
   description = "Ziky Versari est clown-e et jongleureuse antipodiste. Spectacles, ateliers et stages de clown.",
+  image = "/og-image.png",
+  ogType = "website",
 } = Astro.props;
 ---
 
@@ -19,17 +25,17 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f5f0eb" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <SEO {title} {description} {image} {ogType} />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Exo:wght@400;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <StructuredData type="Person" />
   </head>
   <body class="font-sans antialiased">
     <SiteHeader pathname={Astro.url.pathname} />

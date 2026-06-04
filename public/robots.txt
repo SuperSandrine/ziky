@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zikyversari.fr/sitemap-index.xml
+
+# Crawl delay for responsible crawling
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
