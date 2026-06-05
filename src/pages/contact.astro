@@ -170,7 +170,9 @@ import contactPhoto from "../assets/images/portrait/photo contact.webp";
     const isMobileOrTouchDevice = () => {
       return (
         window.innerWidth < 768 ||
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent,
+        ) ||
         window.matchMedia("(hover: none) and (pointer: coarse)").matches
       );
     };
@@ -178,18 +180,21 @@ import contactPhoto from "../assets/images/portrait/photo contact.webp";
     const showFeedback = (type) => {
       const feedback = root.querySelector(`[data-copy-feedback="${type}"]`);
       if (!(feedback instanceof HTMLElement)) return;
-      
-      const timeoutKey = type === "email" ? "emailFeedbackTimeout" : "phoneFeedbackTimeout";
-      
+
+      const timeoutKey =
+        type === "email" ? "emailFeedbackTimeout" : "phoneFeedbackTimeout";
+
       feedback.classList.remove("-mt-4", "translate-y-[-10px]", "opacity-0");
       feedback.classList.add("mt-0", "translate-y-0", "opacity-100");
-      
-      clearTimeout(type === "email" ? emailFeedbackTimeout : phoneFeedbackTimeout);
+
+      clearTimeout(
+        type === "email" ? emailFeedbackTimeout : phoneFeedbackTimeout,
+      );
       const timeout = window.setTimeout(() => {
         feedback.classList.remove("mt-0", "translate-y-0", "opacity-100");
         feedback.classList.add("-mt-4", "translate-y-[-10px]", "opacity-0");
       }, 5000);
-      
+
       if (type === "email") {
         emailFeedbackTimeout = timeout;
       } else {

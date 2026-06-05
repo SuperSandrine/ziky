@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zikyversari.fr/sitemap-index.xml
+Sitemap: https://zikyversari.fr/sitemap.xml
 
 # Crawl delay for responsible crawling
 Crawl-delay: 1
