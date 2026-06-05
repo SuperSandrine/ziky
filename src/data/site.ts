@@ -63,6 +63,8 @@ export interface BiographyMilestone {
 }
 
 export const contactEmail = "ziky.versari@gmail.com";
+export const contactMobile = "06 9905 5782";
+
 
 export const navigation = [
   { label: "Spectacles", href: "/spectacles" },
@@ -278,8 +280,8 @@ export const companies: Company[] = [
 export const biography = {
   intro:`Ziky Versari développe des univers artistiques plaçant le corps au centre de l’action : un corps malléable, hors norme et queer. À travers le clown et la matière, iel explore des comportements non normés afin d’interroger les tabous et d’inviter le public à dépasser certaines croyances limitantes, dans une démarche de légitimation des existences marginales.`,
   intro2:
-    `Ziky Versari est clown-e et jongleureuse antipodiste. Son travail élabore des univers plaçant le corps au centre de l'action, débordant, matière de contact et de relation au monde.`,
-  full:`Ziky Versari est clown·e et jongleureuse antipodiste. Formé·e dans différentes écoles de cirque — du Théâtre Cirqule à Genève à l’École de Cirque de Bordeaux, en passant par Lomme et le Lido à Toulouse — iel développe une pratique à la croisée de la jonglerie et du clown.
+    `Ziky Versari est clown-e, jongleureuse antipodiste et performeureuse. Son travail élabore des univers plaçant le corps au centre de l'action, débordant, matière de contact et de relation au monde.`,
+  full:`Ziky Versari est clown·e, jongleureuse antipodiste et performeureuse. Formé·e dans différentes écoles de cirque — du Théâtre Cirqule à Genève à l’École de Cirque de Bordeaux, en passant par Lomme et le Lido à Toulouse — iel développe une pratique à la croisée de la jonglerie et du clown.
 
   Son travail place le corps au centre de l’action : un corps malléable, hors norme et queer, envisagé comme matière de transformation et de relation au monde. À travers la rencontre avec des objets et des matières du quotidien, iel explore les déformations et les prolongements du geste, ouvrant des espaces où l’étrange et l’impossible prennent forme.
 
@@ -310,6 +312,7 @@ export const biography = {
     "Jonglage antipodiste",
     "Fouet artistique",
     "Lancer de couteaux",
+    "Performeureuse",
     "Regard extérieur",
     "Pédagogie",
   ],

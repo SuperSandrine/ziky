@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = "Ziky Versari - Clown, Cirque, Pédagogie",
-  description = "Ziky Versari est clown-e et jongleureuse antipodiste. Spectacles, ateliers et stages de clown.",
+  title = "Ziky Versari - Clown, Cirque, Performeureuse, Pédagogie",
+  description = "Ziky Versari est clown-e, jongleureuse antipodiste et performeureuse. Spectacles, ateliers et stages de clown.",
   image = "/og-image.png",
   ogType = "website",
   canonicalURL,
@@ -49,4 +49,9 @@ const canonical = canonicalURL || currentURL.href;
 <!-- Additional SEO -->
 <meta name="robots" content="index, follow" />
 <meta name="language" content="French" />
-<link rel="alternate" hrefLang="fr" href={canonical} />
+<meta
+  name="keywords"
+  content="Ziky Versari, Vicky Versari, clown, jonglage antipodiste, performeureuse, spectacle, pédagogie, artiste"
+/>
+<meta name="author" content="Ziky Versari" />
+<link rel="alternate" hreflang="fr" href={canonical} />

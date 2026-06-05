@@ -83,7 +83,7 @@ Outils gratuits:
 - Facebook Sharing Debugger: https://developers.facebook.com/tools/debug/
 
 ### 6. **Soumettre le sitemap**
-
+- ✅ 
 Dans Google Search Console:
 1. Aller à "Sitemaps"
 2. Ajouter: `https://votre-domaine.fr/sitemap-index.xml`
@@ -127,6 +127,9 @@ Le sitemap inclut actuellement:
 4. **Analytics**
    - Google Analytics 4 (GA4)
    - Google Search Console monitoring
+
+5. **indexation**
+   - contrôler l'indexation sur google search console
 
 ## 📝 Fichiers modifiés
 

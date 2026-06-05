@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { contactEmail } from "../data/site";
+import { contactEmail, contactMobile } from "../data/site";
 import Icon from "../components/Icon.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import contactPhoto from "../assets/images/portrait/photo contact.webp";
@@ -18,7 +18,7 @@ import contactPhoto from "../assets/images/portrait/photo contact.webp";
           <Image
             src={contactPhoto}
             alt="Portrai de Ziky Versari en pied"
-            class="h-full min-h-[320px] w-full object-cover"
+            class="h-full min-h-80 w-full object-cover"
             loading="eager"
             priority
             sizes="(max-width: 1024px) 100vw, 46vw"
@@ -39,9 +39,10 @@ import contactPhoto from "../assets/images/portrait/photo contact.webp";
           />
 
           <div
-            class="mt-12 flex flex-col gap-8"
+            class="mt-12 flex flex-col gap-2"
             data-contact-copy-root
             data-email={contactEmail}
+            data-phone={contactMobile}
           >
             <button
               type="button"
@@ -62,12 +63,36 @@ import contactPhoto from "../assets/images/portrait/photo contact.webp";
             </button>
             <p
               class="pointer-events-none -mt-4 translate-y-[-10px] opacity-0 transition-all duration-500 ease-out text-sm text-accent"
-              data-copy-feedback
+              data-copy-feedback="email"
             >
               Adresse mail copiée
             </p>
 
-            <div class="flex items-center gap-3 text-muted-foreground">
+            <button
+              type="button"
+              class="group flex w-fit items-center gap-4 text-left"
+              data-copy-phone
+              aria-label="Copier le numéro ou appeler"
+            >
+              <span
+                class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-110"
+              >
+                <Icon name="phone" class="h-6 w-6" />
+              </span>
+              <span
+                class="text-lg text-foreground underline underline-offset-4 transition-colors group-hover:text-accent"
+              >
+                {contactMobile}
+              </span>
+            </button>
+            <p
+              class="pointer-events-none -mt-4 translate-y-[-10px] opacity-0 transition-all duration-500 ease-out text-sm text-accent"
+              data-copy-feedback="phone"
+            >
+              Numéro copié
+            </p>
+
+            <div class="flex items-center gap-3 text-muted-foreground pt-4">
               <Icon name="map-pin" class="h-5 w-5" />
               <span>Basée dans la Creuse, France</span>
             </div>
@@ -134,42 +159,82 @@ import contactPhoto from "../assets/images/portrait/photo contact.webp";
 <script>
   const root = document.querySelector("[data-contact-copy-root]");
   if (root instanceof HTMLElement) {
-    const trigger = root.querySelector("[data-copy-email]");
-    const feedback = root.querySelector("[data-copy-feedback]");
+    const emailTrigger = root.querySelector("[data-copy-email]");
+    const phoneTrigger = root.querySelector("[data-copy-phone]");
     const email = root.dataset.email || "";
-    let feedbackTimeout;
+    const phone = root.dataset.phone || "";
+    let emailFeedbackTimeout;
+    let phoneFeedbackTimeout;
 
-    const showFeedback = () => {
+    // Détecte si l'utilisateur est sur mobile/tactile
+    const isMobileOrTouchDevice = () => {
+      return (
+        window.innerWidth < 768 ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+        window.matchMedia("(hover: none) and (pointer: coarse)").matches
+      );
+    };
+
+    const showFeedback = (type) => {
+      const feedback = root.querySelector(`[data-copy-feedback="${type}"]`);
       if (!(feedback instanceof HTMLElement)) return;
+      
+      const timeoutKey = type === "email" ? "emailFeedbackTimeout" : "phoneFeedbackTimeout";
+      
       feedback.classList.remove("-mt-4", "translate-y-[-10px]", "opacity-0");
       feedback.classList.add("mt-0", "translate-y-0", "opacity-100");
-      clearTimeout(feedbackTimeout);
-      feedbackTimeout = window.setTimeout(() => {
+      
+      clearTimeout(type === "email" ? emailFeedbackTimeout : phoneFeedbackTimeout);
+      const timeout = window.setTimeout(() => {
         feedback.classList.remove("mt-0", "translate-y-0", "opacity-100");
         feedback.classList.add("-mt-4", "translate-y-[-10px]", "opacity-0");
       }, 5000);
+      
+      if (type === "email") {
+        emailFeedbackTimeout = timeout;
+      } else {
+        phoneFeedbackTimeout = timeout;
+      }
     };
 
-    const copyEmail = async () => {
-      if (!email) return;
-
+    const copyToClipboard = async (text) => {
       try {
-        await navigator.clipboard.writeText(email);
-        showFeedback();
+        await navigator.clipboard.writeText(text);
+        return true;
       } catch {
         const fallback = document.createElement("textarea");
-        fallback.value = email;
+        fallback.value = text;
         fallback.setAttribute("readonly", "");
         fallback.style.position = "absolute";
         fallback.style.left = "-9999px";
         document.body.appendChild(fallback);
         fallback.select();
-        document.execCommand("copy");
+        const success = document.execCommand("copy");
         document.body.removeChild(fallback);
-        showFeedback();
+        return success;
       }
     };
 
-    trigger?.addEventListener("click", copyEmail);
+    const copyEmail = async () => {
+      if (!email) return;
+      await copyToClipboard(email);
+      showFeedback("email");
+    };
+
+    const handlePhone = async () => {
+      if (!phone) return;
+
+      if (isMobileOrTouchDevice()) {
+        // Sur mobile : lance l'appel
+        window.location.href = `tel:${phone.replace(/\s/g, "")}`;
+      } else {
+        // Sur desktop : copie le numéro
+        await copyToClipboard(phone);
+        showFeedback("phone");
+      }
+    };
+
+    emailTrigger?.addEventListener("click", copyEmail);
+    phoneTrigger?.addEventListener("click", handlePhone);
   }
 </script>
