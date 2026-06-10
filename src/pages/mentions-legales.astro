@@ -1,101 +1,231 @@
 ---
-// TODO: vérfier les mentions légales pour assurer leur conformité
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
+import { contactEmail, contactMobile } from "../data/site";
+
+const editorName = "Ziky Versari";
+const siteUrl = "https://zikyversari.fr";
+const lastUpdated = "10 juin 2026";
 ---
 
-<BaseLayout title="Mentions légales | Ziky Versari" description="Informations légales du site Ziky Versari.">
+<BaseLayout
+  title="Mentions légales | Ziky Versari"
+  description="Informations légales du site Ziky Versari."
+>
   <div class="mx-auto max-w-4xl px-6 py-16">
     <SectionHeading
       label="Informations"
       title="Mentions légales"
-      description="Informations d'identification de l'éditeur, de l'hébergeur et indications relatives aux données personnelles."
+      description="Informations d'identification de l'éditeur, de l'hébergeur et relatives aux données personnelles."
     />
 
     <div class="mt-12 space-y-10 text-sm leading-7 text-neutral-700">
       <section class="space-y-4">
         <h2 class="text-xl font-semibold text-neutral-900">Éditeur du site</h2>
         <p>
-          Le présent site est édité par <strong>[Nom ou dénomination sociale]</strong>, <strong>[forme
-          juridique]</strong> au capital social de <strong>[montant du capital social]</strong> euros,
-          immatriculé(e) au <strong>[RCS ou répertoire des métiers]</strong> sous le numéro
-          <strong>[numéro SIREN / SIRET]</strong>, dont le siège social est situé
-          <strong>[adresse complète]</strong>.
+          Le site <strong>{siteUrl}</strong> est édité par <strong
+            >{editorName}</strong
+          >, artiste professionnelle exerçant son activité dans le cadre du
+          régime des intermittents du spectacle.
         </p>
         <p>
-          Numéro de TVA intracommunautaire : <strong>[à compléter si applicable]</strong><br />
-          Téléphone : <strong>[numéro de téléphone]</strong><br />
-          E-mail : <strong>[adresse e-mail de contact]</strong>
+          Téléphone : <strong>{contactMobile}</strong><br />
+          E-mail : <a
+            class="underline underline-offset-4"
+            href={`mailto:${contactEmail}`}>{contactEmail}</a
+          >
         </p>
         <p>
-          Directeur de la publication : <strong>[nom et prénom]</strong><br />
-          Responsable de la rédaction, le cas échéant : <strong>[nom et prénom]</strong>
+          Directeurice de la publication : {editorName}<br />
+          Responsable de la rédaction : {editorName}
+        </p>
+        <p>
+          L'activité présentée sur ce site ne fait pas l'objet d'une
+          exploitation commerciale directe ni d'une vente en ligne. Aucun numéro
+          SIREN ou SIRET n'est communiqué, l'activité étant exercée dans le
+          cadre du régime applicable aux artistes intermittents du spectacle.
         </p>
       </section>
 
       <section class="space-y-4">
         <h2 class="text-xl font-semibold text-neutral-900">Hébergement</h2>
         <p>
-          Le site est hébergé par <strong>[nom de l'hébergeur]</strong>, <strong>[raison sociale]</strong>,
-          situé <strong>[adresse complète de l'hébergeur]</strong>, immatriculé sous le numéro
-          <strong>[numéro SIRET]</strong>, joignable au <strong>[numéro de téléphone]</strong>.
+          Le site est hébergé par <strong>Netlify, Inc.</strong>, dont le siège
+          social est situé : 44 Montgomery Street, Suite 300, San Francisco,
+          California 94104, États-Unis.<br />
+          Site web : <strong>https://www.netlify.com </strong>
+          <br />
+
+          Netlify agit en qualité de prestataire d'hébergement de
+          l'infrastructure technique du site.
         </p>
       </section>
 
       <section class="space-y-4">
-        <h2 class="text-xl font-semibold text-neutral-900">Propriété intellectuelle</h2>
+        <h2 class="text-xl font-semibold text-neutral-900">
+          Propriété intellectuelle
+        </h2>
         <p>
-          L'ensemble des contenus présents sur ce site, incluant notamment les textes, visuels, images,
-          graphismes, logo, vidéos, icônes et éléments sonores, est protégé par le droit de la propriété
-          intellectuelle et demeure, sauf mention contraire, la propriété exclusive de
-          <strong>[nom de l'éditeur]</strong> ou de ses partenaires.
+          L'ensemble des contenus présents sur ce site, incluant notamment les
+          textes, visuels, images, graphismes, logo, vidéos, icônes et éléments
+          sonores, est protégé par le droit de la propriété intellectuelle et
+          demeure, sauf mention contraire, la propriété exclusive de
+          <strong>{editorName}</strong> ou de ses partenaires.
         </p>
         <p>
-          Toute reproduction, représentation, adaptation, publication ou exploitation, totale ou partielle,
-          de tout élément du site, par quelque procédé que ce soit, est interdite sans autorisation
-          préalable écrite.
+          Toute reproduction, représentation, adaptation, publication ou
+          exploitation, totale ou partielle, de tout élément du site, par
+          quelque procédé que ce soit, est interdite sans autorisation préalable
+          écrite.
         </p>
       </section>
 
       <section class="space-y-4">
-        <h2 class="text-xl font-semibold text-neutral-900">Données personnelles</h2>
+        <h2 class="text-xl font-semibold text-neutral-900">
+          Données personnelles
+        </h2>
+        <h3 class="font-semibold text-neutral-900">
+          Responsable du traitement
+        </h3>
         <p>
-          Les informations recueillies via le site sont traitées par <strong>[nom de l'éditeur]</strong>
-          pour les finalités suivantes : <strong>[ex. gestion des demandes de contact, suivi commercial,
-          mesure d'audience]</strong>.
+          Le responsable du traitement des données personnelles collectées via
+          les échanges par courrier électronique ou téléphone est <strong
+            >{editorName}</strong
+          >, joignable à l'adresse suivante :
+          <a
+            class="underline underline-offset-4"
+            href={`mailto:${contactEmail}`}>{contactEmail}</a
+          >.
+        </p>
+        <h3 class="font-semibold text-neutral-900">Finalités du traitement</h3>
+        <p>
+          Les informations transmises volontairement lors d'une prise de contact
+          sont utilisées exclusivement pour :
+          <ul class="list-inside list-disc pl-4 -mt-2">
+            <li>répondre aux demandes de renseignements ;</li>
+            <li>
+              échanger au sujet de programmations artistiques, stages, ateliers
+              ou collaborations ;
+            </li>
+            <li>assurer le suivi des échanges professionnels.</li>
+          </ul>
         </p>
         <p>
-          Conformément à la réglementation applicable, vous disposez d'un droit d'accès, de rectification,
-          d'effacement, d'opposition, de limitation et, le cas échéant, de portabilité de vos données.
-          Vous pouvez exercer ces droits à l'adresse suivante :
-          <strong>[adresse e-mail ou postale de contact RGPD]</strong>.
+          Le site ne comporte pas de formulaire de contact. Lorsque vous
+          contactez l'éditeur par e-mail ou par téléphone, les informations que
+          vous transmettez volontairement sont utilisées uniquement pour
+          répondre à votre demande, échanger au sujet d'une programmation, d'un
+          stage, d'un atelier ou d'une collaboration, et assurer le suivi de la
+          relation engagée.
+        </p>
+                <h3 class="font-semibold text-neutral-900">
+          Base juridique
+        </h3>
+        <p>
+          Le traitement est fondé sur l'intérêt légitime de l'éditeur à répondre aux sollicitations reçues et à gérer les relations professionnelles initiées par les personnes concernées. </p>
+          <h3 class="font-semibold text-neutral-900">
+          Données concernées
+        </h3>
+          <p>Les données susceptibles d'être traitées sont celles que vous choisissez de communiquer, notamment : nom, prénom, coordonnées, structure représentée, objet de la demande et contenu des échanges.
+        </p>
+        <h3 class="font-semibold text-neutral-900">
+          Destinataires
+        </h3>
+        <p>
+          Les données sont accessibles uniquement à l'éditeur du site et, lorsque cela est nécessaire, aux prestataires techniques intervenant dans le fonctionnement du site ou de la messagerie électronique.
+</p>
+    <h3 class="font-semibold text-neutral-900">
+          Durée de conservation
+        </h3>
+        <p> Les données sont conservées pendant la durée nécessaire au traitement de la demande, puis supprimées ou archivées pendant une durée maximale de <strong> trois ans à compter du dernier contact émanant de la personne concernée</strong>, sauf obligation légale imposant une conservation plus longue.
+        </p>
+        <h3 class="font-semibold text-neutral-900">
+          Vos droits
+        </h3>
+        <p>
+          Conformément à la réglementation applicable et à la loi Informatique et Libertés modifiée, vous disposez d'un droit
+          d'accès, de rectification, d'effacement, d'opposition, de limitation
+          du traitement et, le cas échéant, lorsque cela est applicable, d'un droit à la portabilité de vos données. Vous
+          pouvez exercer ces droits en écrivant à :
+          <a
+            class="underline underline-offset-4"
+            href={`mailto:${contactEmail}`}>{contactEmail}</a
+          >.
         </p>
         <p>
-          Pour en savoir plus sur la collecte, l'utilisation et la conservation de vos données personnelles,
-          vous pouvez consulter la politique de confidentialité du site :
-          <strong>[lien vers la politique de confidentialité]</strong>.
+          Si vous estimez que vos droits ne sont pas respectés, vous pouvez
+          adresser une réclamation à la CNIL : <a
+            class="underline underline-offset-4"
+            href="https://www.cnil.fr"
+            target="_blank"
+            rel="noopener noreferrer">www.cnil.fr</a
+          >.
+        </p>
+        <h3 class="font-semibold text-neutral-900">
+          Service tiers
+        </h3>
+        <p>
+          Les polices utilisées par le site sont auto-hébergées. Leur affichage
+          ne déclenche pas de requête vers Google Fonts lors de votre visite.
         </p>
       </section>
 
       <section class="space-y-4">
         <h2 class="text-xl font-semibold text-neutral-900">Cookies</h2>
         <p>
-          Le site peut utiliser des cookies nécessaires à son bon fonctionnement ainsi que, sous réserve de
-          votre consentement lorsque celui-ci est requis, des cookies de mesure d'audience ou de services
-          tiers.
+          À la date de mise à jour indiquée ci-dessous, le site ne dépose pas de
+          cookies de mesure d'audience, de publicité personnalisée ou de partage
+          sur les réseaux sociaux nécessitant un consentement préalable.
+        </p>
+        <h3 class="font-semibold text-neutral-900">
+          Vérification technique des traceurs
+        </h3>
+        <p>
+          Une vérification technique du code source et du site généré a été
+          réalisée le 11 juin 2026. Elle n'a pas identifié de traceur nécessitant
+          un consentement préalable : aucun outil d'analyse d'audience, pixel
+          publicitaire, tag manager, iframe de réseau social, cookie non
+          essentiel, stockage persistant de suivi ou script tiers de mesure
+          n'est chargé lors de la consultation du site.
         </p>
         <p>
-          Lors de votre première visite, un bandeau d'information vous permet d'accepter, de refuser ou de
-          paramétrer l'utilisation de ces cookies. Vous pouvez modifier vos choix à tout moment via
-          <strong>[lien ou mécanisme de gestion des cookies]</strong>.
+          Les liens vers des services externes, notamment YouTube, Instagram,
+          LinkedIn, Netlify ou la CNIL, sont de simples liens sortants. Ils ne
+          déclenchent une navigation vers ces services qu'en cas de clic de
+          l'utilisateur.
+        </p>
+        <p>
+          Si des cookies ou traceurs non essentiels sont ajoutés ultérieurement,
+          un dispositif d'information et de gestion du consentement devra être
+          mis en place avant leur dépôt.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-semibold text-neutral-900">
+          Vente en ligne et abonnements
+        </h2>
+        <p>
+          Le site ne propose aucun achat, paiement en ligne ni souscription d'abonnement. Les informations présentées ont une finalité exclusivement informative et de prise de contact professionnelle.
+
+
         </p>
       </section>
 
       <section class="space-y-4">
         <h2 class="text-xl font-semibold text-neutral-900">Contact</h2>
         <p>
-          Pour toute question relative au site ou à son contenu, vous pouvez écrire à
-          <strong>[adresse e-mail de contact]</strong>.
+          Pour toute question relative au site ou à son contenu, vous pouvez
+          écrire à
+          <a
+            class="underline underline-offset-4"
+            href={`mailto:${contactEmail}`}>{contactEmail}</a
+          >.
+        </p>
+        <p class="text-xs text-neutral-500">
+          Dernière mise à jour : {lastUpdated}. Mentions vérifiées à partir de
+          la fiche officielle "Mentions sur votre site internet : les
+          obligations à respecter" publiée par economie.gouv.fr.
         </p>
       </section>
     </div>

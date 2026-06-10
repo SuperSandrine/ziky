@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
+    "@fontsource/exo": "^5.2.8",
+    "@fontsource/inter": "^5.2.8",
     "astro": "^5.5.5"
   },
   "devDependencies": {
